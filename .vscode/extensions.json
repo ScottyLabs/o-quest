@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "tauri-apps.tauri-vscode",
+        "biomejs.biome",
+        "bradlc.vscode-tailwindcss",
+        "rust-lang.rust-analyzer",
+        "editorconfig.editorconfig",
+        "vercel.turbo-vsc"
+    ]
+}

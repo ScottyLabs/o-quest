@@ -1,0 +1,33 @@
+{
+    "name": "o-quest",
+    "type": "module",
+    "private": true,
+    "packageManager": "bun@1.2.15",
+    "scripts": {
+        "dev": "turbo run dev",
+        "test": "turbo run test",
+        "check:ci": "biome check --no-errors-on-unmatched --files-ignore-unknown=true",
+        "check": "bun run check:ci -- --write --unsafe",
+        "prepare": "husky",
+        "preinstall": "npx only-allow bun"
+    },
+    "commitlint": {
+        "extends": ["@commitlint/config-conventional"]
+    },
+    "lint-staged": {
+        "*": ["bun run check", "sh -c 'bun run test'"]
+    },
+    "workspaces": ["apps/*"],
+    "devDependencies": {
+        "@biomejs/biome": "^1.9.4",
+        "@commitlint/cli": "^19.8.1",
+        "@commitlint/config-conventional": "^19.8.1",
+        "@types/bun": "latest",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.1.0",
+        "turbo": "^2.5.4"
+    },
+    "peerDependencies": {
+        "typescript": "^5"
+    }
+}
