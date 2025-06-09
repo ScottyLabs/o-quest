@@ -1,24 +1,5 @@
 {
     "name": "o-quest",
-    "type": "module",
-    "private": true,
-    "license": "Apache-2.0",
-    "packageManager": "bun@1.2.15",
-    "scripts": {
-        "dev": "turbo run dev",
-        "test": "turbo run test",
-        "check:ci": "biome check --no-errors-on-unmatched --files-ignore-unknown=true",
-        "check": "bun run check:ci -- --write --unsafe",
-        "prepare": "husky",
-        "preinstall": "npx only-allow bun"
-    },
-    "commitlint": {
-        "extends": ["@commitlint/config-conventional"]
-    },
-    "lint-staged": {
-        "*": ["bun run check", "sh -c 'bun run test'"]
-    },
-    "workspaces": ["apps/*"],
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",
         "@commitlint/cli": "^19.8.1",
@@ -30,5 +11,24 @@
     },
     "peerDependencies": {
         "typescript": "^5"
-    }
+    },
+    "commitlint": {
+        "extends": ["@commitlint/config-conventional"]
+    },
+    "license": "Apache-2.0",
+    "lint-staged": {
+        "*": ["bun run check", "sh -c 'bun run test'"]
+    },
+    "packageManager": "bun@1.2.15",
+    "private": true,
+    "scripts": {
+        "dev": "turbo run dev",
+        "test": "turbo run test",
+        "check:ci": "biome check --no-errors-on-unmatched --files-ignore-unknown=true",
+        "check": "bun run check:ci -- --write --unsafe",
+        "prepare": "husky",
+        "preinstall": "npx only-allow bun"
+    },
+    "type": "module",
+    "workspaces": ["apps/*"]
 }
