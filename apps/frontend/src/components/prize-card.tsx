@@ -4,14 +4,19 @@ interface Prize {
     name: string;
     cost: number;
     claimed: number;
+    allowedToClaim: number;
     remaining: number;
     total: number;
     imageUrl: string;
 }
 
 export function PrizeCard({ prize }: { prize: Prize }) {
+    const isMaxClaimed = prize.claimed === prize.allowedToClaim;
+
     return (
-        <Card className="flex flex-row items-center justify-between p-4">
+        <Card
+            className={`flex flex-row items-center justify-between p-4 ${isMaxClaimed ? "bg-gray-200 text-gray-500" : ""}`}
+        >
             <div className="flex flex-col">
                 <CardHeader>
                     <CardTitle className="text-2xl font-bold">
@@ -20,7 +25,13 @@ export function PrizeCard({ prize }: { prize: Prize }) {
                 </CardHeader>
                 <CardContent className="flex flex-col space-y-2">
                     <p>Cost: {prize.cost} points</p>
-                    <p>Claimed: {prize.claimed}</p>
+                    <p
+                        className={
+                            isMaxClaimed ? "text-red-500 font-semibold" : ""
+                        }
+                    >
+                        Claimed: {prize.claimed}/{prize.allowedToClaim}
+                    </p>
                     <p>
                         Remaining: {prize.remaining}/{prize.total}
                     </p>
