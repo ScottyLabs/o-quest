@@ -2,6 +2,7 @@ import {
     Dialog,
     DialogClose,
     DialogContent,
+    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
 import {
@@ -24,6 +25,9 @@ export const Navbar = () => {
                     </button>
                 </DialogTrigger>
                 <DialogContent className="p-0 bg-black/80 max-w-full w-full h-full flex items-center justify-center">
+                    <DialogTitle className="sr-only">
+                        Navigation Menu
+                    </DialogTitle>
                     <DialogClose asChild>
                         <button
                             type="button"
