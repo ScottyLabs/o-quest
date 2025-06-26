@@ -1,3 +1,4 @@
+import { RefLink } from "@/components/ref-link";
 import {
     Dialog,
     DialogClose,
@@ -11,8 +12,10 @@ import {
     NavigationMenuLink,
     NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { VisuallyHidden } from "@/components/ui/visually-hidden";
 import { Link } from "@tanstack/react-router";
 import { Menu, X as XIcon } from "lucide-react";
+import { useState } from "react";
 
 export const Navbar = () => {
     return (
@@ -25,9 +28,9 @@ export const Navbar = () => {
                     </button>
                 </DialogTrigger>
                 <DialogContent className="p-0 bg-black/80 max-w-full w-full h-full flex items-center justify-center">
-                    <DialogTitle className="sr-only">
-                        Navigation Menu
-                    </DialogTitle>
+                    <VisuallyHidden asChild>
+                        <DialogTitle>Navigation Menu</DialogTitle>
+                    </VisuallyHidden>
                     <DialogClose asChild>
                         <button
                             type="button"

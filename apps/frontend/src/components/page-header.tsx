@@ -3,8 +3,10 @@ import {
     Dialog,
     DialogClose,
     DialogContent,
+    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { VisuallyHidden } from "@/components/ui/visually-hidden";
 import { Info } from "lucide-react";
 
 interface PageHeaderProps {
@@ -49,6 +51,9 @@ export function PageHeader({
                         className="rounded-xl max-w-[90vw] min-w-[250px] text-center"
                         style={{ background: "#fff", color: "#222" }}
                     >
+                        <VisuallyHidden asChild>
+                            <DialogTitle>{title}</DialogTitle>
+                        </VisuallyHidden>
                         <div className="mb-4">{infoText}</div>
                         <DialogClose asChild>
                             <Button
