@@ -13,7 +13,7 @@ import {
     NavigationMenuLink,
     NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { VisuallyHidden } from "@/components/ui/visually-hidden";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Link } from "@tanstack/react-router";
 import { Menu, X as XIcon } from "lucide-react";
 import { useState } from "react";
