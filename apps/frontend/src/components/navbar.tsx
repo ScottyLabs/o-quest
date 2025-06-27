@@ -3,6 +3,7 @@ import {
     Dialog,
     DialogClose,
     DialogContent,
+    DialogDescription,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
@@ -30,6 +31,11 @@ export const Navbar = () => {
                 <DialogContent className="p-0 bg-black/80 max-w-full w-full h-full flex items-center justify-center">
                     <VisuallyHidden asChild>
                         <DialogTitle>Navigation Menu</DialogTitle>
+                    </VisuallyHidden>
+                    <VisuallyHidden asChild>
+                        <DialogDescription>
+                            Navigate to a different page here.
+                        </DialogDescription>
                     </VisuallyHidden>
                     <DialogClose asChild>
                         <button

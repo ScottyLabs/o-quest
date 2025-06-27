@@ -3,6 +3,7 @@ import {
     Dialog,
     DialogClose,
     DialogContent,
+    DialogDescription,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
@@ -53,6 +54,9 @@ export function PageHeader({
                     >
                         <VisuallyHidden asChild>
                             <DialogTitle>{title}</DialogTitle>
+                        </VisuallyHidden>
+                        <VisuallyHidden asChild>
+                            <DialogDescription>{infoText}</DialogDescription>
                         </VisuallyHidden>
                         <div className="mb-4">{infoText}</div>
                         <DialogClose asChild>
