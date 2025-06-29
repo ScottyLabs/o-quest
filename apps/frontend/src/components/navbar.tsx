@@ -5,7 +5,7 @@ import {
     NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Link } from "@tanstack/react-router";
-import { Menu, X as XIcon } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useState } from "react";
 
 type NavItem = {
