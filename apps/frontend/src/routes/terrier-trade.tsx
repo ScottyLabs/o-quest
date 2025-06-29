@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/page-header";
-import { createFileRoute } from "@tanstack/react-router";
 import { PrizeCard } from "@/components/prize-card";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/terrier-trade")({
     component: TerrierTrade,
@@ -35,11 +35,11 @@ function TerrierTrade() {
                 title="Terrier Trade"
                 infoText="This page lets you trade your points in for prizes."
             />
-                    <div className="p-4 max-w-xl mx-auto flex flex-col gap-8">
-                  {prizes.map((prize) => (
-                      <PrizeCard key={prize.name} prize={prize} />
-                  ))}
-                      </div>
+            <div className="p-4 max-w-xl mx-auto flex flex-col gap-8">
+                {prizes.map((prize) => (
+                    <PrizeCard key={prize.name} prize={prize} />
+                ))}
+            </div>
         </div>
     );
 }
