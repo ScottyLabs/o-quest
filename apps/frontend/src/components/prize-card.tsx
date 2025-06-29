@@ -15,7 +15,8 @@ export function PrizeCard({ prize }: { prize: Prize }) {
 
     return (
         <Card
-            className={`flex flex-row items-center justify-between p-4 ${isMaxClaimed ? "bg-gray-200 text-gray-500" : ""}`}
+            className={`flex flex-row items-center justify-between p-4 ${isMaxClaimed ? "text-gray-500" : ""}`}
+            style={isMaxClaimed ? { backgroundColor: "#e0e0e0" } : {}}
         >
             <div className="flex flex-col">
                 <CardHeader>
