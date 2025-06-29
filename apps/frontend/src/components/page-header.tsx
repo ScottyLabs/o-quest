@@ -55,10 +55,9 @@ export function PageHeader({
                         <VisuallyHidden asChild>
                             <DialogTitle>{title}</DialogTitle>
                         </VisuallyHidden>
-                        <VisuallyHidden asChild>
-                            <DialogDescription>{infoText}</DialogDescription>
-                        </VisuallyHidden>
-                        <div className="mb-4">{infoText}</div>
+                        <DialogDescription className="mb-4">
+                            {infoText}
+                        </DialogDescription>
                         <DialogClose asChild>
                             <Button
                                 className="mt-2 font-semibold rounded-md px-6 py-2"
