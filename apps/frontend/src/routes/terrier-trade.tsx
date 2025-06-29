@@ -29,7 +29,7 @@ function TerrierTrade() {
         },
     ];
     return (
-        <div className="p-8 max-w-xl mx-auto flex flex-col gap-6">
+        <div className="p-4 max-w-xl mx-auto flex flex-col gap-8">
             {prizes.map((prize) => (
                 <PrizeCard key={prize.name} prize={prize} />
             ))}
