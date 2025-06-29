@@ -84,8 +84,8 @@ export const Navbar = () => {
             {/* Mobile Menu */}
             {isMobileMenuOpen && (
                 <div className="md:hidden fixed inset-0 z-50 bg-black/80">
-                    <div className="flex items-center justify-center min-h-screen">
-                        <div className="relative w-full max-w-xs mx-auto">
+                    <div className="flex w-full h-full">
+                        <div className="relative w-full max-w-xs pt-8 pl-6">
                             {/* Close Button */}
                             <button
                                 type="button"
