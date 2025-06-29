@@ -16,31 +16,33 @@ export function PrizeCard({ prize }: { prize: Prize }) {
     return (
         <Card
             className={
-                "flex flex-row items-center justify-between p-4 border-2 border-black"
+                "flex flex-row items-center justify-between border-2 border-black py-0"
             }
             style={isMaxClaimed ? { backgroundColor: "#e0e0e0" } : {}}
         >
-            <div className="flex flex-col">
-                <CardHeader>
-                    <CardTitle className="text-2xl font-bold">
+            <div className="flex flex-col flex-1">
+                <CardHeader className="pb-2">
+                    <CardTitle className="text-2xl font-bold wrap-anywhere">
                         {prize.name}
                     </CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col space-y-2">
-                    <p>Cost: {prize.cost} points</p>
-                    <p
-                        className={
-                            isMaxClaimed ? "text-red-500 font-semibold" : ""
-                        }
-                    >
-                        Claimed: {prize.claimed}/{prize.allowedToClaim}
-                    </p>
-                    <p>
-                        Remaining: {prize.remaining}/{prize.total}
-                    </p>
+                <CardContent className="flex flex-row items-center justify-between">
+                    <div className="flex flex-col ">
+                        <p>Cost: {prize.cost} points</p>
+                        <p
+                            className={
+                                isMaxClaimed ? "text-red-500 font-semibold" : ""
+                            }
+                        >
+                            Claimed: {prize.claimed}/{prize.allowedToClaim}
+                        </p>
+                        <p>
+                            Remaining: {prize.remaining}/{prize.total}
+                        </p>
+                    </div>
                 </CardContent>
             </div>
-            <div>
+            <div className="p-4">
                 <img
                     src={prize.imageUrl}
                     alt={prize.name}
