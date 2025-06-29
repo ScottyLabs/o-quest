@@ -8,6 +8,12 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X as XIcon } from "lucide-react";
 import { useState } from "react";
 
+type NavItem = {
+    to: string;
+    label: string;
+    type: "primary" | "secondary";
+};
+
 export const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -19,12 +25,25 @@ export const Navbar = () => {
         setIsMobileMenuOpen(false);
     };
 
-    const navItems = [
-        { to: "/challenges", label: "Challenges" },
-        { to: "/terrier-trade", label: "Terrier Trade" },
-        { to: "/leaderboard", label: "Leaderboard" },
-        { to: "/about", label: "About" },
+    const navItems: NavItem[] = [
+        { to: "/challenges", label: "Challenges", type: "primary" },
+        { to: "/terrier-trade", label: "Terrier Trade", type: "primary" },
+        { to: "/leaderboard", label: "Leaderboard", type: "primary" },
+        { to: "/about", label: "About", type: "secondary" },
     ];
+
+    const getLinkClasses = (
+        type: "primary" | "secondary",
+        isMobile = false,
+    ) => {
+        if (isMobile) {
+            return type === "primary"
+                ? "!text-4xl !font-extrabold text-white w-full block"
+                : "!text-3xl !font-bold text-white w-full block";
+        }
+        // Desktop: all links have the same size
+        return "text-sm font-medium transition-colors hover:text-foreground/80";
+    };
 
     return (
         <div className="border-b">
@@ -38,7 +57,9 @@ export const Navbar = () => {
                                     <NavigationMenuLink asChild>
                                         <Link
                                             to={item.to}
-                                            className="text-sm font-medium transition-colors hover:text-foreground/80"
+                                            className={getLinkClasses(
+                                                item.type,
+                                            )}
                                         >
                                             {item.label}
                                         </Link>
@@ -86,7 +107,10 @@ export const Navbar = () => {
                                             <NavigationMenuLink asChild>
                                                 <Link
                                                     to={item.to}
-                                                    className="text-white text-2xl font-extrabold w-full block"
+                                                    className={getLinkClasses(
+                                                        item.type,
+                                                        true,
+                                                    )}
                                                     onClick={closeMobileMenu}
                                                 >
                                                     {item.label}
