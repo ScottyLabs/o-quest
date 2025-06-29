@@ -69,15 +69,17 @@ export const Navbar = () => {
                         </NavigationMenuList>
                     </NavigationMenu>
 
-                    {/* Mobile Menu Button */}
-                    <button
-                        type="button"
-                        className="md:hidden p-2"
-                        onClick={toggleMobileMenu}
-                        aria-label="Toggle mobile menu"
-                    >
-                        <Menu size={32} />
-                    </button>
+                    {/* Mobile Menu Button - only show when menu is closed */}
+                    {!isMobileMenuOpen && (
+                        <button
+                            type="button"
+                            className="md:hidden p-2"
+                            onClick={toggleMobileMenu}
+                            aria-label="Toggle mobile menu"
+                        >
+                            <Menu size={32} />
+                        </button>
+                    )}
                 </div>
             </div>
 
@@ -86,14 +88,14 @@ export const Navbar = () => {
                 <div className="md:hidden fixed inset-0 z-50 bg-black/80">
                     <div className="flex w-full h-full">
                         <div className="relative w-full max-w-xs pt-8 pl-6">
-                            {/* Close Button */}
+                            {/* Hamburger Icon as Close Button */}
                             <button
                                 type="button"
-                                className="absolute top-4 right-4 text-white opacity-80 hover:opacity-100 z-50"
+                                className="text-white mb-8 p-2"
                                 onClick={closeMobileMenu}
                                 aria-label="Close mobile menu"
                             >
-                                <XIcon size={24} />
+                                <Menu size={32} className="rotate-90" />
                             </button>
 
                             {/* Mobile Navigation */}
