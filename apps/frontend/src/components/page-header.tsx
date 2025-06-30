@@ -26,7 +26,7 @@ export function PageHeader({
             style={{ background: bgColor }}
         >
             <span
-                className="absolute left-0 right-0 mx-auto font-bold text-3xl text-center select-none pointer-events-none"
+                className="absolute left-0 right-0 mx-auto font-extrabold text-3xl text-center select-none pointer-events-none"
                 style={{ color: textColor }}
             >
                 {title}

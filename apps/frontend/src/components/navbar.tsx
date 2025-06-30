@@ -87,17 +87,19 @@ export const Navbar = () => {
             {isMobileMenuOpen && (
                 <div className="md:hidden fixed inset-0 z-50 bg-black/80">
                     <div className="flex w-full h-full">
-                        <div className="relative w-full max-w-xs pt-8 pl-6">
-                            {/* Hamburger Icon as Close Button */}
+                        {/* Close Button */}
+                        <div className="absolute pt-4 pl-4 z-10">
                             <button
                                 type="button"
-                                className="text-white mb-8 p-2"
+                                className="text-white p-2"
                                 onClick={closeMobileMenu}
                                 aria-label="Close mobile menu"
                             >
                                 <Menu size={32} className="rotate-90" />
                             </button>
+                        </div>
 
+                        <div className="relative w-full max-w-xs pt-20 pl-6">
                             {/* Mobile Navigation */}
                             <NavigationMenu className="w-full">
                                 <NavigationMenuList className="flex flex-col gap-4 items-start w-full">
