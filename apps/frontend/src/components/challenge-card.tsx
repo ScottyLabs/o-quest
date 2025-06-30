@@ -13,6 +13,7 @@ interface Challenge {
 export function ChallengeCard({ challenge }: { challenge: Challenge }) {
     const [scanned, setScanned] = useState(false);
     const isUnlocked = challenge.unlocked;
+    const isCompleted = challenge.completed || scanned;
 
     return (
         <Card className="flex flex-row items-center justify-between border-2 border-black py-0">
@@ -39,15 +40,15 @@ export function ChallengeCard({ challenge }: { challenge: Challenge }) {
             <div className="p-4 flex flex-col items-center">
                 <Button
                     className={
-                        scanned
+                        isCompleted
                             ? "w-16 h-16 rounded-md bg-green-500 text-white"
                             : "w-16 h-16 rounded-md bg-gray-200 border border-gray-400"
                     }
                     onClick={() => setScanned(true)}
-                    disabled={!isUnlocked || scanned}
+                    disabled={!isUnlocked || isCompleted}
                 />
                 <span className="mt-2 text-xs font-semibold text-gray-500">
-                    Tap to scan!
+                    {isCompleted ? "Completed!" : "Tap to scan!"}
                 </span>
             </div>
         </Card>
