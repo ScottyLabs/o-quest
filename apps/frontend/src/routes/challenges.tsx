@@ -56,7 +56,7 @@ function Challenges() {
                 infoText="This page shows you the challenges."
             />
             <div className="p-4 max-w-xl mx-auto flex flex-col gap-8">
-                {dummyChallenges.map((challenge, index) => (
+                {dummyChallenges.map((challenge) => (
                     <ChallengeCard key={challenge.name} challenge={challenge} />
                 ))}
             </div>
