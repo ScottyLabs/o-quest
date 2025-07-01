@@ -15,6 +15,7 @@ import { Route as AboutImport } from "./routes/about";
 import { Route as ChallengesImport } from "./routes/challenges";
 import { Route as IndexImport } from "./routes/index";
 import { Route as LeaderboardImport } from "./routes/leaderboard";
+import { Route as OnboardingImport } from "./routes/onboarding";
 import { Route as TerrierTradeImport } from "./routes/terrier-trade";
 
 // Create/Update Routes
@@ -22,6 +23,12 @@ import { Route as TerrierTradeImport } from "./routes/terrier-trade";
 const TerrierTradeRoute = TerrierTradeImport.update({
     id: "/terrier-trade",
     path: "/terrier-trade",
+    getParentRoute: () => rootRoute,
+} as any);
+
+const OnboardingRoute = OnboardingImport.update({
+    id: "/onboarding",
+    path: "/onboarding",
     getParentRoute: () => rootRoute,
 } as any);
 
@@ -81,6 +88,13 @@ declare module "@tanstack/react-router" {
             preLoaderRoute: typeof LeaderboardImport;
             parentRoute: typeof rootRoute;
         };
+        "/onboarding": {
+            id: "/onboarding";
+            path: "/onboarding";
+            fullPath: "/onboarding";
+            preLoaderRoute: typeof OnboardingImport;
+            parentRoute: typeof rootRoute;
+        };
         "/terrier-trade": {
             id: "/terrier-trade";
             path: "/terrier-trade";
@@ -98,6 +112,7 @@ export interface FileRoutesByFullPath {
     "/about": typeof AboutRoute;
     "/challenges": typeof ChallengesRoute;
     "/leaderboard": typeof LeaderboardRoute;
+    "/onboarding": typeof OnboardingRoute;
     "/terrier-trade": typeof TerrierTradeRoute;
 }
 
@@ -106,6 +121,7 @@ export interface FileRoutesByTo {
     "/about": typeof AboutRoute;
     "/challenges": typeof ChallengesRoute;
     "/leaderboard": typeof LeaderboardRoute;
+    "/onboarding": typeof OnboardingRoute;
     "/terrier-trade": typeof TerrierTradeRoute;
 }
 
@@ -115,6 +131,7 @@ export interface FileRoutesById {
     "/about": typeof AboutRoute;
     "/challenges": typeof ChallengesRoute;
     "/leaderboard": typeof LeaderboardRoute;
+    "/onboarding": typeof OnboardingRoute;
     "/terrier-trade": typeof TerrierTradeRoute;
 }
 
@@ -125,15 +142,23 @@ export interface FileRouteTypes {
         | "/about"
         | "/challenges"
         | "/leaderboard"
+        | "/onboarding"
         | "/terrier-trade";
     fileRoutesByTo: FileRoutesByTo;
-    to: "/" | "/about" | "/challenges" | "/leaderboard" | "/terrier-trade";
+    to:
+        | "/"
+        | "/about"
+        | "/challenges"
+        | "/leaderboard"
+        | "/onboarding"
+        | "/terrier-trade";
     id:
         | "__root__"
         | "/"
         | "/about"
         | "/challenges"
         | "/leaderboard"
+        | "/onboarding"
         | "/terrier-trade";
     fileRoutesById: FileRoutesById;
 }
@@ -143,6 +168,7 @@ export interface RootRouteChildren {
     AboutRoute: typeof AboutRoute;
     ChallengesRoute: typeof ChallengesRoute;
     LeaderboardRoute: typeof LeaderboardRoute;
+    OnboardingRoute: typeof OnboardingRoute;
     TerrierTradeRoute: typeof TerrierTradeRoute;
 }
 
@@ -151,6 +177,7 @@ const rootRouteChildren: RootRouteChildren = {
     AboutRoute: AboutRoute,
     ChallengesRoute: ChallengesRoute,
     LeaderboardRoute: LeaderboardRoute,
+    OnboardingRoute: OnboardingRoute,
     TerrierTradeRoute: TerrierTradeRoute,
 };
 
@@ -168,6 +195,7 @@ export const routeTree = rootRoute
         "/about",
         "/challenges",
         "/leaderboard",
+        "/onboarding",
         "/terrier-trade"
       ]
     },
@@ -182,6 +210,9 @@ export const routeTree = rootRoute
     },
     "/leaderboard": {
       "filePath": "leaderboard.tsx"
+    },
+    "/onboarding": {
+      "filePath": "onboarding.tsx"
     },
     "/terrier-trade": {
       "filePath": "terrier-trade.tsx"
