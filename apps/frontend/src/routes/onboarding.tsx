@@ -19,14 +19,14 @@ const steps: Step[] = [
         title: "Explore Campus",
         description:
             "Even more cool subheading which will not be read by the user",
-        image: "/images/onboarding/placholder.svg",
+        image: "/images/onboarding-images/placeholder.svg",
         button: "Next",
         action: "next",
     },
     {
         title: "Collect Coins",
         description: "Scotty Coins can be earned through completing tasks",
-        image: "/images/onboarding/collect-coins.svg",
+        image: "/images/onboarding-images/collect-coins.svg",
         button: "Next",
         action: "next",
     },
@@ -34,7 +34,7 @@ const steps: Step[] = [
         title: "Reap Rewards",
         description:
             "Trade Scotty Coin at the Terrier Trade to earn swag, rewards, and more",
-        image: "/images/onboarding/placholder.svg",
+        image: "/images/onboarding-images/placeholder.svg",
         button: "Log In",
         action: "login",
     },
