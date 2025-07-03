@@ -63,8 +63,9 @@ function Onboarding() {
     const { title, description, image, button } = step;
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-white">
-            <div className="w-full max-w-xs p-8 rounded-3xl shadow-lg flex flex-col items-center">
+        <div className="min-h-screen bg-white flex flex-col">
+            {/* Scrollable content area */}
+            <div className="flex-1 overflow-y-auto flex flex-col items-center justify-center px-8">
                 {/* Image */}
                 <div className="w-28 h-28 rounded-xl bg-gray-100 flex items-center justify-center mb-8">
                     <img
@@ -90,10 +91,13 @@ function Onboarding() {
                         />
                     ))}
                 </div>
-                {/* Buttons */}
+            </div>
+
+            {/* Buttons */}
+            <div className="px-8 pb-8 shrink-0">
                 <Button
                     onClick={handleStepAction}
-                    className="w-full py-3 bg-red-700 text-white rounded-full text-lg font-medium mb-2 transition hover:bg-red-800"
+                    className="w-full h-12 bg-red-700 text-white rounded-3xl text-lg font-medium font-bold mb-2 transition hover:bg-red-800"
                     type="button"
                 >
                     {button}
@@ -101,8 +105,8 @@ function Onboarding() {
                 {currentStep > 0 && (
                     <Button
                         onClick={prevStep}
-                        variant="secondary"
-                        className="w-full py-2 bg-gray-200 text-gray-500 rounded-full text-base font-normal transition hover:bg-gray-300"
+                        variant="ghost"
+                        className="w-full py-2 text-gray-500 text-base font-normal transition hover:bg-gray-100"
                         type="button"
                     >
                         Back
