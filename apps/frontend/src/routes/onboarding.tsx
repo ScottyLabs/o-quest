@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/onboarding")({
     component: Onboarding,
@@ -44,6 +44,16 @@ function Onboarding() {
     const [currentStep, setCurrentStep] = useState(0);
     const navigate = useNavigate();
 
+    // Check if user has completed onboarding on component mount
+    useEffect(() => {
+        const hasCompletedOnboarding = localStorage.getItem(
+            "onboardingCompleted",
+        );
+        if (hasCompletedOnboarding === "true") {
+            navigate({ to: "/" });
+        }
+    }, [navigate]);
+
     const nextStep = () =>
         setCurrentStep((s) => Math.min(s + 1, steps.length - 1));
     const prevStep = () => setCurrentStep((s) => Math.max(s - 1, 0));
@@ -51,6 +61,8 @@ function Onboarding() {
     const handleStepAction = () => {
         const currentStepData = steps[currentStep];
         if (currentStepData?.action === "login") {
+            // Mark onboarding as completed when user clicks "Log In"
+            localStorage.setItem("onboardingCompleted", "true");
             navigate({ to: "/" });
         } else {
             nextStep();
