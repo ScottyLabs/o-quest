@@ -19,14 +19,14 @@ const steps: Step[] = [
         title: "Explore Campus",
         description:
             "Even more cool subheading which will not be read by the user",
-        image: "/path/to/image1.png",
+        image: "/images/onboarding/placholder.svg",
         button: "Next",
         action: "next",
     },
     {
         title: "Collect Coins",
         description: "Scotty Coins can be earned through completing tasks",
-        image: "/path/to/image2.png",
+        image: "/images/onboarding/collect-coins.svg",
         button: "Next",
         action: "next",
     },
@@ -34,7 +34,7 @@ const steps: Step[] = [
         title: "Reap Rewards",
         description:
             "Trade Scotty Coin at the Terrier Trade to earn swag, rewards, and more",
-        image: "/path/to/image3.png",
+        image: "/images/onboarding/placholder.svg",
         button: "Log In",
         action: "login",
     },
@@ -67,13 +67,11 @@ function Onboarding() {
             {/* Scrollable content area */}
             <div className="flex-1 overflow-y-auto flex flex-col items-center justify-center px-8">
                 {/* Image */}
-                <div className="w-28 h-28 rounded-xl bg-gray-100 flex items-center justify-center mb-8">
-                    <img
-                        src={image}
-                        alt={title}
-                        className="w-20 h-20 object-contain"
-                    />
-                </div>
+                <img
+                    src={image}
+                    alt={title}
+                    className="w-37 h-37 object-contain mb-8"
+                />
                 {/* Title */}
                 <h2 className="text-2xl font-medium mb-2 text-center">
                     {title}
