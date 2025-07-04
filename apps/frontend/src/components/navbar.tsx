@@ -30,6 +30,7 @@ export const Navbar = () => {
         { to: "/terrier-trade", label: "Terrier Trade", type: "primary" },
         { to: "/leaderboard", label: "Leaderboard", type: "primary" },
         { to: "/about", label: "About", type: "secondary" },
+        { to: "/onboarding", label: "Onboarding", type: "secondary" },
     ];
 
     const getLinkClasses = (
