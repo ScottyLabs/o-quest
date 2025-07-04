@@ -1,12 +1,12 @@
 import { LeaderboardCard } from "@/components/leaderboard-card";
 import { PageHeader } from "@/components/page-header";
 import { createFileRoute } from "@tanstack/react-router";
+import { MoreHorizontal } from "lucide-react";
 
 export const Route = createFileRoute("/leaderboard")({
     component: Leaderboard,
 });
 
-// Fake leaderboard data
 type User = {
     place: number;
     name: string;
@@ -14,6 +14,7 @@ type User = {
     points: number;
 };
 
+// Fake leaderboard data
 const top10: User[] = [
     { place: 1, name: "Jeffrey Wang", andrewId: "andrewid1", points: 100 },
     { place: 2, name: "Alice Smith", andrewId: "asmith", points: 99 },
@@ -59,15 +60,23 @@ function Leaderboard() {
                 title="Leaderboard"
                 infoText="This page shows the students with the most points."
             />
-            <div className="bg-white rounded-xl shadow divide-y mt-6 overflow-hidden">
+            <div className="bg-white divide-y overflow-hidden">
                 {inTop10 ? (
-                    top10.map((user) => (
-                        <LeaderboardCard
-                            key={user.andrewId}
-                            {...user}
-                            highlight={user.andrewId === currentUser.andrewId}
-                        />
-                    ))
+                    <>
+                        {top10.map((user) => (
+                            <LeaderboardCard
+                                key={user.andrewId}
+                                {...user}
+                                highlight={
+                                    user.andrewId === currentUser.andrewId
+                                }
+                            />
+                        ))}
+                        {/* Dots separator for more users */}
+                        <div className="flex items-center justify-center py-2 bg-white text-gray-400 select-none">
+                            <MoreHorizontal className="h-4 w-4" />
+                        </div>
+                    </>
                 ) : (
                     <>
                         {top10.map((user) => (
@@ -75,7 +84,7 @@ function Leaderboard() {
                         ))}
                         {/* Dots separator */}
                         <div className="flex items-center justify-center py-2 bg-white text-gray-400 select-none">
-                            •••
+                            <MoreHorizontal className="h-4 w-4" />
                         </div>
                         {/* Before current user */}
                         <LeaderboardCard {...beforeCurrent} />
@@ -83,6 +92,10 @@ function Leaderboard() {
                         <LeaderboardCard {...currentUser} highlight />
                         {/* After current user */}
                         <LeaderboardCard {...afterCurrent} />
+                        {/* Dots separator for more users */}
+                        <div className="flex items-center justify-center py-2 bg-white text-gray-400 select-none">
+                            <MoreHorizontal className="h-4 w-4" />
+                        </div>
                     </>
                 )}
             </div>
