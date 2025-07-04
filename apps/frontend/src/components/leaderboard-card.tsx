@@ -20,12 +20,12 @@ export function LeaderboardCard({
     return (
         <Card
             className={cn(
-                "flex flex-row items-center px-4 py-3 border-b last:border-b-0 transition-colors",
+                "flex flex-row items-center px-3 py-2.5 border-b last:border-b-0 transition-colors rounded-none",
                 highlight ? "bg-red-600 text-white" : "bg-white text-black",
             )}
         >
             {/* Place */}
-            <div className="w-8 text-center font-medium text-base shrink-0 mr-2">
+            <div className="w-7 text-center font-medium text-base shrink-0 mr-1.5">
                 {place}
             </div>
             {/* User Info */}
@@ -43,7 +43,7 @@ export function LeaderboardCard({
                 </span>
             </div>
             {/* Points & Right Arrow */}
-            <div className="flex items-center gap-2 ml-2">
+            <div className="flex items-center gap-1.5 ml-1.5">
                 <span className="font-semibold text-base">{points} Pts</span>
                 {/* Right Arrow Icon */}
                 <ChevronRight className="w-5 h-5 opacity-60" />
