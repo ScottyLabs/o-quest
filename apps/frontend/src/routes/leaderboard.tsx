@@ -14,6 +14,9 @@ type User = {
     points: number;
 };
 
+// Total number of users in the leaderboard (eventually will be from API)
+const TOTAL_USERS = 250;
+
 // Fake leaderboard data
 const top10: User[] = [
     { place: 1, name: "Jeffrey Wang", andrewId: "andrewid1", points: 100 },
@@ -52,8 +55,14 @@ function isCurrentUserInTop10() {
     return top10.some((u) => u.andrewId === currentUser.andrewId);
 }
 
+function isCurrentUserLast() {
+    // Check if the current user's place equals the total number of users
+    return currentUser.place === TOTAL_USERS;
+}
+
 function Leaderboard() {
     const inTop10 = isCurrentUserInTop10();
+    const isLast = isCurrentUserLast();
     return (
         <div className="max-w-md mx-auto">
             <PageHeader
@@ -90,12 +99,14 @@ function Leaderboard() {
                         <LeaderboardCard {...beforeCurrent} />
                         {/* Current user (highlighted) */}
                         <LeaderboardCard {...currentUser} highlight />
-                        {/* After current user */}
-                        <LeaderboardCard {...afterCurrent} />
-                        {/* Dots separator for more users */}
-                        <div className="flex items-center justify-center py-2 bg-white text-gray-400 select-none">
-                            <MoreHorizontal className="h-4 w-4" />
-                        </div>
+                        {/* After current user - only show if not last */}
+                        {!isLast && <LeaderboardCard {...afterCurrent} />}
+                        {/* Dots separator for more users - only show if not last */}
+                        {!isLast && (
+                            <div className="flex items-center justify-center py-2 bg-white text-gray-400 select-none">
+                                <MoreHorizontal className="h-4 w-4" />
+                            </div>
+                        )}
                     </>
                 )}
             </div>
