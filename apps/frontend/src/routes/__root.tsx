@@ -1,4 +1,5 @@
-import { Navbar } from "@/components/navbar";
+// import { Navbar } from "@/components/navbar";
+import { BottomNavBar } from "@/components/bottom-navbar";
 import { Outlet, createRootRoute, useLocation } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
@@ -9,8 +10,9 @@ export const Route = createRootRoute({
 
         return (
             <>
-                {!isOnboarding && <Navbar />}
+                {/* {!isOnboarding && <Navbar />} */}
                 <Outlet />
+                {!isOnboarding && <BottomNavBar />}
                 <TanStackRouterDevtools />
             </>
         );
