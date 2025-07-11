@@ -8,7 +8,7 @@ export type LeaderboardUser = User & {
     place: number;
 };
 
-export type Profile = {
+export type UserProfile = {
     avatarUrl: string;
     name: string;
     andrewId: string;

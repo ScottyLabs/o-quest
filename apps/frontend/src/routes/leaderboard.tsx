@@ -1,5 +1,6 @@
 import { LeaderboardCard } from "@/components/leaderboard-card";
 import { PageHeader } from "@/components/page-header";
+import type { LeaderboardUser } from "@/lib/types";
 import { createFileRoute } from "@tanstack/react-router";
 import { MoreHorizontal } from "lucide-react";
 
@@ -7,18 +8,11 @@ export const Route = createFileRoute("/leaderboard")({
     component: Leaderboard,
 });
 
-type User = {
-    place: number;
-    name: string;
-    andrewId: string;
-    points: number;
-};
-
 // Total number of users in the leaderboard (eventually will be from API)
 const TOTAL_USERS = 250;
 
 // Fake leaderboard data
-const top10: User[] = [
+const top10: LeaderboardUser[] = [
     { place: 1, name: "Jeffrey Wang", andrewId: "andrewid1", points: 100 },
     { place: 2, name: "Alice Smith", andrewId: "asmith", points: 99 },
     { place: 3, name: "Bob Lee", andrewId: "blee", points: 97 },
@@ -32,19 +26,19 @@ const top10: User[] = [
 ];
 
 // Simulate current user (change this to test different scenarios)
-const currentUser: User = {
+const currentUser: LeaderboardUser = {
     place: 210,
     name: "Jeffrey Wang",
     andrewId: "andrewid",
     points: 33,
 };
-const beforeCurrent: User = {
+const beforeCurrent: LeaderboardUser = {
     place: 209,
     name: "Sam Lee",
     andrewId: "slee",
     points: 34,
 };
-const afterCurrent: User = {
+const afterCurrent: LeaderboardUser = {
     place: 211,
     name: "Tina Ho",
     andrewId: "tho",

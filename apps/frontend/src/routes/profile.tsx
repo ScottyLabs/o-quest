@@ -1,34 +1,12 @@
+import type { UserProfile } from "@/lib/types";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { Camera, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 
-interface Profile {
-    avatarUrl: string;
-    name: string;
-    andrewId: string;
-    house: {
-        name: string;
-        icon: string;
-        dorm: string;
-    };
-    currentScottyCoins: number;
-    totalScottyCoins: number;
-    challengesCompleted: number;
-    totalChallenges: number;
-    leaderboard: {
-        rank: number;
-        name: string;
-        andrewId: string;
-        points: number;
-    };
-    gallery: string[];
-}
-
 // Mock function to simulate backend data fetching
-function useProfileData(): Profile | null {
-    const [data, setData] = useState<Profile | null>(null);
+function useProfileData(): UserProfile | null {
+    const [data, setData] = useState<UserProfile | null>(null);
     useEffect(() => {
         setTimeout(() => {
             setData({
@@ -45,7 +23,7 @@ function useProfileData(): Profile | null {
                 challengesCompleted: 6,
                 totalChallenges: 12,
                 leaderboard: {
-                    rank: 210,
+                    place: 210,
                     name: "Jeffrey Wang",
                     andrewId: "#andrewid",
                     points: 33,
@@ -140,7 +118,7 @@ function Profile() {
                 {/* Leaderboard Card */}
                 <div className="bg-red-600 rounded-2xl shadow-md flex items-center px-4 py-3 mb-4 text-white relative">
                     <div className="text-2xl font-bold mr-4">
-                        {data.leaderboard.rank}
+                        {data.leaderboard.place}
                     </div>
                     <div className="flex-1">
                         <div className="font-semibold">
