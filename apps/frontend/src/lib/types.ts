@@ -8,15 +8,16 @@ export type LeaderboardUser = User & {
     place: number;
 };
 
+export type House = {
+    name: string;
+    dorm: string;
+};
+
 export type UserProfile = {
     avatarUrl: string;
     name: string;
     andrewId: string;
-    house: {
-        name: string;
-        icon: string;
-        dorm: string;
-    };
+    house: House;
     currentScottyCoins: number;
     totalScottyCoins: number;
     challengesCompleted: number;

@@ -15,7 +15,6 @@ function useProfileData(): UserProfile | null {
                 andrewId: "jw8",
                 house: {
                     name: "Yellow Faction",
-                    icon: "\uD83D\uDFE1", // yellow circle emoji
                     dorm: "Morewood Garden",
                 },
                 currentScottyCoins: 210,
@@ -25,7 +24,7 @@ function useProfileData(): UserProfile | null {
                 leaderboard: {
                     place: 210,
                     name: "Jeffrey Wang",
-                    andrewId: "#andrewid",
+                    andrewId: "jw8",
                     points: 33,
                 },
                 gallery: [
@@ -75,7 +74,6 @@ function Profile() {
                             </div>
                             <div className="mb-1">{data.house.dorm}</div>
                             <div className="flex items-center gap-2 mb-1">
-                                <span>{data.house.icon}</span>
                                 <span>{data.house.name}</span>
                             </div>
                         </div>
