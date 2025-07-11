@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { Camera, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
@@ -153,9 +153,12 @@ function Profile() {
                     <div className="text-lg font-bold">
                         {data.leaderboard.points} Pts
                     </div>
-                    <Button className="ml-2 bg-red-700 hover:bg-red-800 text-white rounded-full px-3 py-1">
+                    <Link
+                        to="/leaderboard"
+                        className="ml-2 bg-red-700 hover:bg-red-800 text-white rounded-full px-3 py-1 inline-flex items-center justify-center"
+                    >
                         <ChevronRight />
-                    </Button>
+                    </Link>
                 </div>
 
                 {/* Gallery */}
