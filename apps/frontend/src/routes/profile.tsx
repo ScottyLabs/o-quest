@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Camera } from "lucide-react";
+import { Camera, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
@@ -32,7 +32,7 @@ function useProfileData(): Profile | null {
     useEffect(() => {
         setTimeout(() => {
             setData({
-                avatarUrl: "/images/onboarding-images/collect-coins.svg",
+                avatarUrl: "/images/sample-profile-pic.svg",
                 name: "Jeffrey Wang",
                 andrewId: "jw8",
                 house: {
@@ -83,12 +83,8 @@ function Profile() {
                             <img
                                 src={data.avatarUrl}
                                 alt="avatar"
-                                className="w-28 h-28 rounded-2xl bg-yellow-300 object-contain"
-                                style={{ background: "#FFD600" }}
+                                className="w-40 h-50 rounded-2xl object-contain"
                             />
-                            <span className="font-bold text-yellow-700 mt-2 text-lg">
-                                yuxiang
-                            </span>
                         </div>
                         <div className="flex-1">
                             <div className="mb-1">
@@ -107,33 +103,33 @@ function Profile() {
                         </div>
                     </div>
                     {/* Progress Bars */}
-                    <div className="mt-4">
-                        <div className="font-semibold text-sm">
+                    <div className="mt-1">
+                        <div className="font-semibold text-md">
                             Task Completed:
                         </div>
-                        <div className="w-full h-4 bg-gray-300 rounded-full mt-1 mb-2 relative">
+                        <div className="w-full h-4 bg-gray-700 rounded-full mt-1 mb-2 relative">
                             <div
                                 className="h-4 bg-blue-500 rounded-full absolute top-0 left-0"
                                 style={{
                                     width: `${(data.challengesCompleted / data.totalChallenges) * 100}%`,
                                 }}
                             />
-                            <span className="absolute right-2 top-0 text-white text-xs font-bold">
+                            <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold">
                                 {data.challengesCompleted}/
                                 {data.totalChallenges}
                             </span>
                         </div>
-                        <div className="font-semibold text-sm">
+                        <div className="font-semibold text-md">
                             Task Completed:
                         </div>
-                        <div className="w-full h-4 bg-gray-300 rounded-full mt-1 mb-2 relative">
+                        <div className="w-full h-4 bg-gray-700 rounded-full mt-1 mb-2 relative">
                             <div
                                 className="h-4 bg-green-500 rounded-full absolute top-0 left-0"
                                 style={{
                                     width: `${(data.challengesCompleted / data.totalChallenges) * 100}%`,
                                 }}
                             />
-                            <span className="absolute right-2 top-0 text-white text-xs font-bold">
+                            <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold">
                                 {data.challengesCompleted}/
                                 {data.totalChallenges}
                             </span>
@@ -158,7 +154,7 @@ function Profile() {
                         {data.leaderboard.points} Pts
                     </div>
                     <Button className="ml-2 bg-red-700 hover:bg-red-800 text-white rounded-full px-3 py-1">
-                        &gt;
+                        <ChevronRight />
                     </Button>
                 </div>
 
