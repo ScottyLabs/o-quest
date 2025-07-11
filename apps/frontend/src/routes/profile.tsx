@@ -114,8 +114,8 @@ function Profile() {
                 </Card>
 
                 {/* Leaderboard Card */}
-                <div className="bg-red-600 rounded-2xl shadow-md flex items-center px-4 py-3 mb-4 text-white relative">
-                    <div className="text-2xl font-bold mr-4">
+                <div className="bg-red-700 rounded-2xl shadow-md flex items-center px-4 py-4 mb-4 text-white relative">
+                    <div className="font-bold mr-8">
                         {data.leaderboard.place}
                     </div>
                     <div className="flex-1">
@@ -129,10 +129,7 @@ function Profile() {
                     <div className="text-lg font-bold">
                         {data.leaderboard.points} Pts
                     </div>
-                    <Link
-                        to="/leaderboard"
-                        className="ml-2 bg-red-700 hover:bg-red-800 text-white rounded-full px-3 py-1 inline-flex items-center justify-center"
-                    >
+                    <Link to="/leaderboard" className="text-white ml-6">
                         <ChevronRight />
                     </Link>
                 </div>
