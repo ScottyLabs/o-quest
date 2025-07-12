@@ -133,7 +133,7 @@ function Profile() {
 
             {/* Gallery */}
             <div className="mb-2 flex items-center gap-2">
-                <Camera className="w-6 h-6 text-gray-700" />
+                <Camera className="w-6 h-6 text-red-700" />
                 <span className="font-semibold text-lg">Gallery</span>
             </div>
             <div className="grid grid-cols-2 gap-2 mb-8">
