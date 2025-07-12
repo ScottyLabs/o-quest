@@ -29,7 +29,18 @@ function useProfileData(): UserProfile | null {
                 },
                 gallery: [
                     // Placeholder images
-                    "/images/onboarding-images/placeholder.svg",
+                    {
+                        id: "1",
+                        title: "Sample Image",
+                        src: "/images/onboarding-images/placeholder.svg",
+                        alt: "Sample placeholder image",
+                    },
+                    {
+                        id: "2",
+                        title: "Sample Image 1",
+                        src: "/images/onboarding-images/placeholder.svg",
+                        alt: "Sample placeholder image",
+                    },
                 ],
             });
         }, 500);
@@ -137,11 +148,11 @@ function Profile() {
                 <span className="font-semibold text-lg">Gallery</span>
             </div>
             <div className="grid grid-cols-2 gap-2 mb-8">
-                {data.gallery.map((img: string) => (
+                {data.gallery.map((img) => (
                     <img
-                        key={img}
-                        src={img}
-                        alt={img}
+                        key={img.id}
+                        src={img.src}
+                        alt={img.alt}
                         className="w-full h-32 object-cover rounded-xl border"
                     />
                 ))}

@@ -13,6 +13,13 @@ export type House = {
     dorm: string;
 };
 
+export type ImageInfo = {
+    id: string;
+    title: string;
+    src: string;
+    alt: string;
+};
+
 export type UserProfile = {
     avatarUrl: string;
     name: string;
@@ -23,5 +30,5 @@ export type UserProfile = {
     challengesCompleted: number;
     totalChallenges: number;
     leaderboard: LeaderboardUser;
-    gallery: string[];
+    gallery: ImageInfo[];
 };
