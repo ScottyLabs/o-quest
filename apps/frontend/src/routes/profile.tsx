@@ -51,104 +51,100 @@ function Profile() {
         );
 
     return (
-        <div className="bg-[#F3E9D2] min-h-screen pb-20">
-            <div className="max-w-md mx-auto p-4">
-                {/* Profile Card */}
-                <Card className="rounded-3xl shadow-md p-4 mb-4 relative">
-                    <div className="flex flex-row gap-4 items-center">
-                        <div className="flex flex-col items-center">
-                            <img
-                                src={data.avatarUrl}
-                                alt="avatar"
-                                className="w-40 h-50 rounded-2xl object-contain"
-                            />
-                        </div>
-                        <div className="flex-1">
-                            <div className="mb-1">
-                                <span className="font-bold">Name:</span>{" "}
-                                {data.name}
-                            </div>
-                            <div className="mb-1">
-                                <span className="font-bold">Andrew ID:</span>{" "}
-                                {data.andrewId}
-                            </div>
-                            <div className="mb-1">{data.house.dorm}</div>
-                            <div className="flex items-center gap-2 mb-1">
-                                <span>{data.house.name}</span>
-                            </div>
-                        </div>
-                    </div>
-                    {/* Progress Bars */}
-                    <div className="mt-1">
-                        <div className="font-semibold text-md">
-                            Task Completed:
-                        </div>
-                        <div className="w-full h-4 bg-gray-700 rounded-full mt-1 mb-2 relative">
-                            <div
-                                className="h-4 bg-blue-500 rounded-full absolute top-0 left-0"
-                                style={{
-                                    width: `${(data.challengesCompleted / data.totalChallenges) * 100}%`,
-                                }}
-                            />
-                            <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold">
-                                {data.challengesCompleted}/
-                                {data.totalChallenges}
-                            </span>
-                        </div>
-                        <div className="font-semibold text-md">
-                            Task Completed:
-                        </div>
-                        <div className="w-full h-4 bg-gray-700 rounded-full mt-1 mb-2 relative">
-                            <div
-                                className="h-4 bg-green-500 rounded-full absolute top-0 left-0"
-                                style={{
-                                    width: `${(data.challengesCompleted / data.totalChallenges) * 100}%`,
-                                }}
-                            />
-                            <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold">
-                                {data.challengesCompleted}/
-                                {data.totalChallenges}
-                            </span>
-                        </div>
-                    </div>
-                </Card>
-
-                {/* Leaderboard Card */}
-                <div className="bg-red-700 rounded-2xl shadow-md flex items-center px-4 py-4 mb-4 text-white relative">
-                    <div className="font-bold mr-8">
-                        {data.leaderboard.place}
+        <div className="bg-[#F3E9D2] min-h-screen pb-20 max-w-md mx-auto p-4">
+            {/* Profile Card */}
+            <Card className="rounded-4xl shadow-md p-4 mb-4 mt-4 relative overflow-visible">
+                {/* Decorative SVG at the top */}
+                <div
+                    className="w-full flex justify-center -mt-8 mb-2"
+                    style={{ position: "relative", zIndex: 1 }}
+                >
+                    <img
+                        src="/images/sticky-note-top.svg"
+                        alt="Sticky Note Top"
+                        style={{ width: "60%" }}
+                    />
+                </div>
+                <div className="flex flex-row gap-4 items-center">
+                    <div className="flex flex-col items-center">
+                        <img
+                            src={data.avatarUrl}
+                            alt="avatar"
+                            className="w-40 h-50 rounded-2xl object-contain"
+                        />
                     </div>
                     <div className="flex-1">
-                        <div className="font-semibold">
-                            {data.leaderboard.name}
+                        <div className="mb-1">
+                            <span className="font-bold">Name:</span> {data.name}
                         </div>
-                        <div className="text-xs">
-                            {data.leaderboard.andrewId}
+                        <div className="mb-1">
+                            <span className="font-bold">Andrew ID:</span>{" "}
+                            {data.andrewId}
+                        </div>
+                        <div className="mb-1">{data.house.dorm}</div>
+                        <div className="flex items-center gap-2 mb-1">
+                            <span>{data.house.name}</span>
                         </div>
                     </div>
-                    <div className="text-lg font-bold">
-                        {data.leaderboard.points} Pts
-                    </div>
-                    <Link to="/leaderboard" className="text-white ml-6">
-                        <ChevronRight />
-                    </Link>
                 </div>
-
-                {/* Gallery */}
-                <div className="mb-2 flex items-center gap-2">
-                    <Camera className="w-6 h-6 text-gray-700" />
-                    <span className="font-semibold text-lg">Gallery</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2 mb-8">
-                    {data.gallery.map((img: string) => (
-                        <img
-                            key={img}
-                            src={img}
-                            alt={img}
-                            className="w-full h-32 object-cover rounded-xl border"
+                {/* Progress Bars */}
+                <div className="mt-1">
+                    <div className="font-semibold text-md">Task Completed:</div>
+                    <div className="w-full h-4 bg-gray-700 rounded-full mt-1 mb-2 relative">
+                        <div
+                            className="h-4 bg-blue-500 rounded-full absolute top-0 left-0"
+                            style={{
+                                width: `${(data.challengesCompleted / data.totalChallenges) * 100}%`,
+                            }}
                         />
-                    ))}
+                        <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold">
+                            {data.challengesCompleted}/{data.totalChallenges}
+                        </span>
+                    </div>
+                    <div className="font-semibold text-md">Task Completed:</div>
+                    <div className="w-full h-4 bg-gray-700 rounded-full mt-1 mb-2 relative">
+                        <div
+                            className="h-4 bg-green-500 rounded-full absolute top-0 left-0"
+                            style={{
+                                width: `${(data.challengesCompleted / data.totalChallenges) * 100}%`,
+                            }}
+                        />
+                        <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold">
+                            {data.challengesCompleted}/{data.totalChallenges}
+                        </span>
+                    </div>
                 </div>
+            </Card>
+
+            {/* Leaderboard Card */}
+            <div className="bg-red-700 rounded-2xl shadow-md flex items-center px-4 py-4 mb-4 text-white relative">
+                <div className="font-bold mr-8">{data.leaderboard.place}</div>
+                <div className="flex-1">
+                    <div className="font-semibold">{data.leaderboard.name}</div>
+                    <div className="text-xs">{data.leaderboard.andrewId}</div>
+                </div>
+                <div className="text-lg font-bold">
+                    {data.leaderboard.points} Pts
+                </div>
+                <Link to="/leaderboard" className="text-white ml-6">
+                    <ChevronRight />
+                </Link>
+            </div>
+
+            {/* Gallery */}
+            <div className="mb-2 flex items-center gap-2">
+                <Camera className="w-6 h-6 text-gray-700" />
+                <span className="font-semibold text-lg">Gallery</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2 mb-8">
+                {data.gallery.map((img: string) => (
+                    <img
+                        key={img}
+                        src={img}
+                        alt={img}
+                        className="w-full h-32 object-cover rounded-xl border"
+                    />
+                ))}
             </div>
         </div>
     );
