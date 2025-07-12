@@ -121,7 +121,7 @@ function Profile() {
                 <div className="font-bold mr-8">{data.leaderboard.place}</div>
                 <div className="flex-1">
                     <div className="font-semibold">{data.leaderboard.name}</div>
-                    <div className="text-xs">{data.leaderboard.andrewId}</div>
+                    <div className="text-md">{data.leaderboard.andrewId}</div>
                 </div>
                 <div className="text-lg font-bold">
                     {data.leaderboard.points} Pts
