@@ -62,7 +62,7 @@ function Profile() {
         );
 
     return (
-        <div className="bg-[#F3E9D2] min-h-screen pb-20 max-w-md mx-auto p-4">
+        <div className="bg-[#F3E9D2] min-h-screen pb-20 max-w-md mx-auto p-4 flex flex-col">
             {/* Profile Card */}
             <Card className="rounded-4xl shadow-md p-4 mb-4 mt-4 relative overflow-visible">
                 {/* Decorative SVG at the top */}
@@ -147,15 +147,17 @@ function Profile() {
                 <Camera className="w-6 h-6 text-red-700" />
                 <span className="font-semibold text-lg">Gallery</span>
             </div>
-            <div className="grid grid-cols-2 gap-2 mb-8">
-                {data.gallery.map((img) => (
-                    <img
-                        key={img.id}
-                        src={img.src}
-                        alt={img.alt}
-                        className="w-full h-32 object-cover rounded-xl border"
-                    />
-                ))}
+            <div className="flex-1 overflow-x-auto">
+                <div className="flex gap-2 pb-4 h-64">
+                    {data.gallery.map((img) => (
+                        <img
+                            key={img.id}
+                            src={img.src}
+                            alt={img.alt}
+                            className="w-80 h-64 object-cover rounded-xl border flex-shrink-0"
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     );
