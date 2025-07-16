@@ -10,6 +10,7 @@ function Challenges() {
     // Dummy challenge data
     const dummyChallenges = [
         {
+            id: 0,
             name: "Find the Hidden Treasure",
             description:
                 "Locate the secret treasure chest hidden somewhere on campus",
@@ -18,6 +19,7 @@ function Challenges() {
             unlock_date: "2024-01-15",
         },
         {
+            id: 1,
             name: "Solve the Riddle",
             description:
                 "Answer the ancient riddle to unlock the next challenge",
@@ -26,6 +28,7 @@ function Challenges() {
             unlock_date: "2024-01-16",
         },
         {
+            id: 2,
             name: "Mystery Challenge",
             description: "A mysterious challenge that will be revealed soon",
             completed: false,
@@ -33,6 +36,7 @@ function Challenges() {
             unlock_date: "2024-01-20",
         },
         {
+            id: 3,
             name: "Photo Scavenger Hunt",
             description:
                 "Take photos of 5 specific landmarks around the university",
@@ -41,6 +45,7 @@ function Challenges() {
             unlock_date: "2024-01-17",
         },
         {
+            id: 4,
             name: "Future Challenge",
             description: "This challenge is locked for now",
             completed: false,
@@ -57,7 +62,7 @@ function Challenges() {
             />
             <div className="p-4 max-w-xl mx-auto flex flex-col gap-8">
                 {dummyChallenges.map((challenge) => (
-                    <ChallengeCard key={challenge.name} challenge={challenge} />
+                    <ChallengeCard key={challenge.id} challenge={challenge} />
                 ))}
             </div>
         </div>

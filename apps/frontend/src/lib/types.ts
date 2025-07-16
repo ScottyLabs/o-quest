@@ -32,3 +32,12 @@ export type UserProfile = {
     leaderboard: LeaderboardUser;
     gallery: ImageInfo[];
 };
+
+export type Challenge = {
+    id: number;
+    name: string;
+    description: string;
+    completed: boolean;
+    unlocked: boolean;
+    unlock_date: string;
+};
