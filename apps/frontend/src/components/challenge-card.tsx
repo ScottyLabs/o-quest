@@ -1,18 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Check, Lock } from "lucide-react";
+import { BadgeCheck, Check, Lock } from "lucide-react";
 import type { Challenge } from "../lib/types";
 
 export function ChallengeCard({ challenge }: { challenge: Challenge }) {
-    const { name, description, completed, unlocked, unlock_date } = challenge;
+    const {
+        name,
+        description,
+        coins_earned_for_completion,
+        completed,
+        unlocked,
+        unlock_date,
+    } = challenge;
     // Locked state
     if (!unlocked) {
         return (
             <Card className="bg-[#172126] rounded-2xl w-full max-w-lg shadow-md">
                 <CardContent className="flex items-center min-h-0">
-                    <div className="w-10 h-10 rounded-lg bg-black mr-2" />
+                    <div className="w-10 h-10 rounded-lg bg-black mr-4 -rotate-6" />
                     <div className="flex-1">
-                        <div className="font-bold text-white text-base leading-tight">
+                        <div className="font-bold text-white text-base">
                             {name}
                         </div>
                         <div className="text-gray-200 text-xs">
@@ -21,10 +28,10 @@ export function ChallengeCard({ challenge }: { challenge: Challenge }) {
                     </div>
                     <div className="ml-2">
                         <div className="relative">
-                            <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center shadow-md">
+                            <div className="absolute top-7 w-11 h-3 rounded-b-md bg-gray-400 z-0" />
+                            <div className="w-11 h-9 rounded-md bg-white flex items-center justify-center relative z-10">
                                 <Lock size={20} color="#222" strokeWidth={2} />
                             </div>
-                            <div className="absolute left-1 top-8 w-8 h-2 rounded-b-xl bg-gray-300 opacity-60" />
                         </div>
                     </div>
                 </CardContent>
@@ -36,13 +43,8 @@ export function ChallengeCard({ challenge }: { challenge: Challenge }) {
         return (
             <Card className="bg-green-100 rounded-2xl w-full max-w-lg">
                 <CardContent className="flex items-center min-h-0">
-                    <div className="w-10 h-10 rounded-lg bg-[#E74C3C] mr-2 flex items-center justify-center">
-                        <Check
-                            size={22}
-                            color="#fff"
-                            strokeWidth={2.5}
-                            aria-label="Completed"
-                        />
+                    <div className="w-10 h-10 mr-4 flex items-center justify-center -rotate-6">
+                        <BadgeCheck size={40} color="#fff" fill="#4CAF50" />
                     </div>
                     <div className="flex-1 font-bold text-green-700 text-base">
                         {name}
@@ -55,26 +57,26 @@ export function ChallengeCard({ challenge }: { challenge: Challenge }) {
     return (
         <Card className="bg-white rounded-2xl w-full max-w-lg shadow-md">
             <CardContent className="flex items-center min-h-0">
-                <div className="w-10 h-10 rounded-lg bg-[#E74C3C] mr-2" />
+                <div className="w-10 h-10 rounded-lg bg-[#E74C3C] mr-4 -rotate-6" />
                 <div className="flex-1">
-                    <div className="font-bold text-black text-base leading-tight">
-                        {name}
-                    </div>
+                    <div className="font-bold text-black text-base">{name}</div>
                     <div className="text-gray-500 text-xs">{description}</div>
                 </div>
                 <div className="flex items-center gap-1 ml-1">
-                    <span className="font-bold text-black text-sm">5</span>
+                    <span className="font-bold text-black text-sm">
+                        {coins_earned_for_completion}
+                    </span>
                     <img
                         src="/images/about-page-scotty.svg"
                         alt="Scotty Coin"
                         className="w-4 h-4"
                     />
-                    <Button
-                        variant="ghost"
-                        className="w-7 h-7 p-0 bg-gray-100 border-radius-5 shadow-xs transition-all duration-200"
-                    >
-                        <Check size={18} color="#4CAF50" strokeWidth={3} />
-                    </Button>
+                    <div className="relative">
+                        <div className="absolute top-7 w-11 h-3 rounded-b-md bg-gray-300 z-0" />
+                        <Button className="w-11 h-9 rounded-md bg-gray-100 flex items-center justify-center relative z-10">
+                            <Check size={40} color="#4CAF50" strokeWidth={3} />
+                        </Button>
+                    </div>
                 </div>
             </CardContent>
         </Card>
