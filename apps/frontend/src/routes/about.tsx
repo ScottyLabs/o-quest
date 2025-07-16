@@ -14,9 +14,10 @@ function About() {
                 className="w-40 mx-auto mb-2"
             />
             <div className="text-gray-700 text-sm mb-6 px-2 text-center">
-                Orientation Quest, or O-Quest, is a scavenger hunt app and
-                Alternate Reality Game (ARG), designed for Carnegie Mellon’s
-                First-Year Orientation. This experience runs alongside
+                <span className="font-bold">Orientation Quest,</span> or{" "}
+                <span className="font-bold">O-Quest</span>, is a scavenger hunt
+                app and Alternate Reality Game (ARG), designed for Carnegie
+                Mellon’s First-Year Orientation. This experience runs alongside
                 First-Year Orientation, with the first-years able to complete
                 objectives at their own pace.
             </div>
@@ -26,11 +27,12 @@ function About() {
                 <div className="font-extrabold text-2xl text-red-700 mb-2">
                     On-Boarding
                 </div>
-                <ol className="list-decimal ml-6 text-gray-800 space-y-4">
+                <ol className="list-decimal ml-6 text-gray-700 space-y-4">
                     <li>
-                        <span className="font-semibold">
+                        <span className="font-bold">
                             Explore Campus and Earn ScottyCoins:
-                        </span>{" "}
+                        </span>
+                        <br />
                         Scan QR Codes at various places on campus to complete
                         challenges and earn ScottyCoins!
                         <div className="flex gap-2 mt-2">
@@ -55,9 +57,10 @@ function About() {
                         </div>
                     </li>
                     <li>
-                        <span className="font-semibold">
+                        <span className="font-bold">
                             Redeem Rewards at the Terrier Trade:
-                        </span>{" "}
+                        </span>
+                        <br />
                         Exchange ScottyCoins during O-Week for CMU merchandise
                         and Carnegie Cup points!
                         <div className="flex justify-center my-2">
@@ -84,9 +87,10 @@ function About() {
                         </div>
                     </li>
                     <li>
-                        <span className="font-semibold">
+                        <span className="font-bold">
                             Create Your Own Adventure:
-                        </span>{" "}
+                        </span>
+                        <br />
                         Explore with your friends, learn about campus life, and
                         take fun photos!
                     </li>
@@ -95,7 +99,7 @@ function About() {
 
             {/* Terrier Trade Section */}
             <div className="w-full mb-6">
-                <div className="font-extrabold text-2xl text-gray-800 mb-1">
+                <div className="font-extrabold text-2xl text-gray-700 mb-1">
                     Terrier Trade
                 </div>
                 <div className="text-gray-700 text-sm mb-2">
@@ -110,7 +114,7 @@ function About() {
 
             {/* Challenges Section */}
             <div className="w-full mb-6">
-                <div className="font-extrabold text-2xl text-gray-800 mb-1">
+                <div className="font-extrabold text-2xl text-gray-700 mb-1">
                     Challenges
                 </div>
                 <div className="text-gray-700 text-sm mb-2">
@@ -121,7 +125,7 @@ function About() {
                     and utilities around campus, such as the UC Mailroom and the
                     CPDC.
                 </div>
-                <ul className="list-disc ml-6 text-gray-800 text-sm mb-2">
+                <ul className="list-disc ml-6 text-gray-700 text-sm mb-2">
                     <li>UC Mailroom</li>
                     <li>The HUB</li>
                     <li>SLICE Office</li>
@@ -156,7 +160,7 @@ function About() {
                     Library, as well as lesser known but visually interesting
                     locations around campus such as the Number Garden.
                 </div>
-                <ul className="list-disc ml-6 text-gray-800 text-sm mb-2">
+                <ul className="list-disc ml-6 text-gray-700 text-sm mb-2">
                     <li>The Fence</li>
                     <li>Hunt Library</li>
                     <li>
@@ -179,7 +183,7 @@ function About() {
                     around campus, such as Pausch Bridge and the Wean-Doherty
                     hallways.
                 </div>
-                <ul className="list-disc ml-6 text-gray-800 text-sm mb-2">
+                <ul className="list-disc ml-6 text-gray-700 text-sm mb-2">
                     <li>Doherty 4 &lt;—&gt; Wean 5</li>
                     <li>Doherty 1 &lt;—&gt; Wean 6</li>
                     <li>Doherty 2 &lt;—&gt; Wean 7</li>
@@ -214,7 +218,7 @@ function About() {
                     category relates to activities and locations surrounding
                     campus, all of which come with first-years’ student IDs.
                 </div>
-                <ul className="list-disc ml-6 text-gray-800 text-sm mb-2">
+                <ul className="list-disc ml-6 text-gray-700 text-sm mb-2">
                     <li>Bus Stops</li>
                     <li>Shuttles</li>
                     <li>Carnegie Museum</li>
