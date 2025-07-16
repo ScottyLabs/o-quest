@@ -60,7 +60,7 @@ function Challenges() {
                 title="Challenges"
                 infoText="This page shows you the challenges."
             />
-            <div className="p-4 max-w-xl mx-auto flex flex-col gap-8">
+            <div className="p-4 max-w-xl mx-auto flex flex-col gap-3">
                 {dummyChallenges.map((challenge) => (
                     <ChallengeCard key={challenge.id} challenge={challenge} />
                 ))}
