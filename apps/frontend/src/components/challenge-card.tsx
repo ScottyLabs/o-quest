@@ -17,7 +17,7 @@ export function ChallengeCard({ challenge }: { challenge: Challenge }) {
         return (
             <Card className="bg-[#172126] rounded-2xl w-full max-w-lg shadow-md">
                 <CardContent className="flex items-center min-h-0">
-                    <div className="w-10 h-10 rounded-lg bg-black mr-4 -rotate-6" />
+                    <div className="w-12 h-12 rounded-lg bg-black mr-4 -rotate-6" />
                     <div className="flex-1">
                         <div className="font-bold text-white text-base">
                             {name}
@@ -41,12 +41,12 @@ export function ChallengeCard({ challenge }: { challenge: Challenge }) {
     // Completed state
     if (completed) {
         return (
-            <Card className="bg-green-100 rounded-2xl w-full max-w-lg">
+            <Card className="bg-green-100 rounded-2xl w-full max-w-lg shadow-md">
                 <CardContent className="flex items-center min-h-0">
-                    <div className="w-10 h-10 mr-4 flex items-center justify-center -rotate-6">
-                        <BadgeCheck size={40} color="#fff" fill="#4CAF50" />
+                    <div className="w-12 h-12 mr-4 flex items-center justify-center -rotate-6">
+                        <BadgeCheck size={48} color="#fff" fill="#4CAF50" />
                     </div>
-                    <div className="flex-1 font-bold text-green-700 text-base">
+                    <div className="flex-1 font-bold text-[#4CAF50] text-base line-through">
                         {name}
                     </div>
                 </CardContent>
@@ -57,7 +57,7 @@ export function ChallengeCard({ challenge }: { challenge: Challenge }) {
     return (
         <Card className="bg-white rounded-2xl w-full max-w-lg shadow-md">
             <CardContent className="flex items-center min-h-0">
-                <div className="w-10 h-10 rounded-lg bg-[#E74C3C] mr-4 -rotate-6" />
+                <div className="w-12 h-12 rounded-lg bg-[#E74C3C] mr-4 -rotate-6" />
                 <div className="flex-1">
                     <div className="font-bold text-black text-base">{name}</div>
                     <div className="text-gray-500 text-xs">{description}</div>
@@ -67,9 +67,9 @@ export function ChallengeCard({ challenge }: { challenge: Challenge }) {
                         {coins_earned_for_completion}
                     </span>
                     <img
-                        src="/images/about-page-scotty.svg"
+                        src="/images/scotty-coin.svg"
                         alt="Scotty Coin"
-                        className="w-4 h-4"
+                        className="w-6 h-6 mt-1"
                     />
                     <div className="relative">
                         <div className="absolute top-7 w-11 h-3 rounded-b-md bg-gray-300 z-0" />
