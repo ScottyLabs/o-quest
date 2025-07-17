@@ -1,9 +1,61 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BadgeCheck, Check, Lock } from "lucide-react";
+import { BadgeCheck, Check, Circle, Lock } from "lucide-react";
 import type { Challenge } from "../lib/types";
 
-export function ChallengeCard({ challenge }: { challenge: Challenge }) {
+// Circular icons for each state using Lucide icons
+const CompletedIcon = () => (
+    <div className="w-10 h-10 rounded-full bg-[#4CAF50] flex items-center justify-center border-4 border-white shadow">
+        <Check size={20} color="white" strokeWidth={3} />
+    </div>
+);
+
+const UnlockedIcon = () => (
+    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border-4 border-[#E74C3C] shadow">
+        <Circle size={16} color="#E74C3C" fill="none" strokeWidth={2} />
+    </div>
+);
+
+const LockedIcon = () => (
+    <div className="w-10 h-10 rounded-full bg-[#6B46C1] flex items-center justify-center border-4 border-white shadow">
+        <Lock size={16} color="white" strokeWidth={2} />
+    </div>
+);
+
+// Wrapper component that adds icon and line
+export function ChallengeCardWithIcon({
+    challenge,
+    showLineBelow = true,
+}: { challenge: Challenge; showLineBelow?: boolean }) {
+    const { unlocked, completed } = challenge;
+
+    let Icon = null;
+    if (!unlocked) Icon = LockedIcon;
+    else if (completed) Icon = CompletedIcon;
+    else Icon = UnlockedIcon;
+
+    return (
+        <div className="flex flex-row items-stretch">
+            {" "}
+            {/* Icon + vertical line */}
+            <div className="flex flex-col items-center mr-4">
+                <Icon />
+                {showLineBelow && (
+                    <div className="w-px h-12 border-l-2 border-dashed border-gray-300 mt-1" />
+                )}
+            </div>
+            {/* Card content */}
+            <div className="flex-1">
+                <ChallengeCard challenge={challenge} />
+            </div>
+        </div>
+    );
+}
+
+// Main wrapper
+export function ChallengeCard({
+    challenge,
+}: { challenge: Challenge; showLineBelow?: boolean }) {
     const {
         name,
         description,

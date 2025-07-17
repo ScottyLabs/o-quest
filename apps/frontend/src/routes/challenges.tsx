@@ -1,4 +1,4 @@
-import { ChallengeCard } from "@/components/challenge-card";
+import { ChallengeCardWithIcon } from "@/components/challenge-card";
 import { PageHeader } from "@/components/page-header";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -67,7 +67,10 @@ function Challenges() {
             />
             <div className="p-4 max-w-xl mx-auto flex flex-col gap-3">
                 {dummyChallenges.map((challenge) => (
-                    <ChallengeCard key={challenge.id} challenge={challenge} />
+                    <ChallengeCardWithIcon
+                        key={challenge.id}
+                        challenge={challenge}
+                    />
                 ))}
             </div>
         </div>
