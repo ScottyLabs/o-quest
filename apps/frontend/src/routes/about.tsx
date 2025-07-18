@@ -1,5 +1,4 @@
 import { ChallengeCard } from "@/components/challenge-card";
-import type { Challenge } from "@/lib/types";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/about")({
