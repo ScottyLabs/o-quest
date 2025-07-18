@@ -1,3 +1,5 @@
+import { ChallengeCard } from "@/components/challenge-card";
+import type { Challenge } from "@/lib/types";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/about")({
@@ -35,25 +37,31 @@ function About() {
                         <br />
                         Scan QR Codes at various places on campus to complete
                         challenges and earn ScottyCoins!
-                        <div className="flex gap-2 mt-2">
-                            <div className="flex items-center bg-white border rounded-lg px-3 py-2 shadow-sm">
-                                <span className="font-bold text-gray-700 mr-2">
-                                    📬
-                                </span>
-                                <span className="text-xs">
-                                    You have got Mail
-                                    <br />
-                                    in the University Center
-                                </span>
-                            </div>
-                            <div className="flex items-center bg-green-100 border border-green-300 rounded-lg px-3 py-2 shadow-sm">
-                                <span className="font-bold text-green-700 mr-2">
-                                    ✅
-                                </span>
-                                <span className="text-xs">
-                                    You have got Mail
-                                </span>
-                            </div>
+                        <div className="flex flex-col gap-2 mt-2">
+                            <ChallengeCard
+                                challenge={{
+                                    id: 1,
+                                    name: "You have got Mail",
+                                    description:
+                                        "Visit the University Center mailroom",
+                                    coins_earned_for_completion: 5,
+                                    completed: false,
+                                    unlocked: true,
+                                    unlock_date: "2025-08-18",
+                                }}
+                            />
+                            <ChallengeCard
+                                challenge={{
+                                    id: 2,
+                                    name: "You have got Mail",
+                                    description:
+                                        "Visit the University Center mailroom",
+                                    coins_earned_for_completion: 5,
+                                    completed: true,
+                                    unlocked: true,
+                                    unlock_date: "2025-08-18",
+                                }}
+                            />
                         </div>
                     </li>
                     <li>
