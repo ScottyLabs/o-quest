@@ -11,7 +11,9 @@ export const Route = createRootRoute({
         return (
             <>
                 {/* {!isOnboarding && <Navbar />} */}
-                <Outlet />
+                <div className={!isOnboarding ? "pb-10" : undefined}>
+                    <Outlet />
+                </div>
                 {!isOnboarding && <BottomNavBar />}
                 <TanStackRouterDevtools />
             </>
