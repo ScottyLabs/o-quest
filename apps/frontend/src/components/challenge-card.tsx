@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BadgeCheck, Check, Circle, Lock } from "lucide-react";
+import { BadgeCheck, Check, Lock } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { Challenge } from "../lib/types";
 
