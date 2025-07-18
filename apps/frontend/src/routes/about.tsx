@@ -63,6 +63,13 @@ function About() {
                                 }}
                             />
                         </div>
+                        <div className="flex justify-center my-2">
+                            <img
+                                src="/images/about-page-scotty-coin.svg"
+                                alt="Scotty Coin"
+                                className="w-40"
+                            />
+                        </div>
                     </li>
                     <li>
                         <span className="font-bold">
@@ -71,13 +78,7 @@ function About() {
                         <br />
                         Exchange ScottyCoins during O-Week for CMU merchandise
                         and Carnegie Cup points!
-                        <div className="flex justify-center my-2">
-                            <img
-                                src="/images/about-page-scotty.svg"
-                                alt="Scotty Mascot"
-                                className="w-20"
-                            />
-                        </div>
+                        {/* use terrier trade card instead */}
                         <div className="bg-white border rounded-lg px-3 py-2 shadow-sm flex items-center gap-2">
                             <div>
                                 <div className="font-bold text-xs">
@@ -111,12 +112,16 @@ function About() {
                     Terrier Trade
                 </div>
                 <div className="text-gray-700 text-sm mb-2">
-                    Cash in Scotty Coins at the Terrier Trade for either
-                    Carnegie Cup Points (Points for their Dorm) or Merchandise.
+                    Cash in <span className="font-bold">Scotty Coins</span> at
+                    the Terrier Trade for either
+                    <span className="font-bold">Carnegie Cup Points</span>{" "}
+                    (Points for their Dorm) or{" "}
+                    <span className="font-bold">Merchandise</span>.
                     <br />
-                    <span className="font-bold">Merch Distribution</span> can be
-                    picked up at a designated University Center (UC) location
-                    everyday
+                    <span className="font-bold">
+                        Merch Distribution can be picked up at a designated
+                        University Center (UC) location everyday
+                    </span>
                 </div>
             </div>
 
@@ -125,10 +130,8 @@ function About() {
                 <div className="font-extrabold text-2xl text-gray-700 mb-1">
                     Challenges
                 </div>
-                <div className="text-gray-700 text-sm mb-2">
-                    <span className="font-bold text-red-700">
-                        “The Essentials”
-                    </span>{" "}
+                <div className="text-gray-700 text-sm font-bold mb-2">
+                    <span className="text-red-700">“The Essentials”</span>{" "}
                     category teaches First-Year students about useful services
                     and utilities around campus, such as the UC Mailroom and the
                     CPDC.
@@ -159,9 +162,9 @@ function About() {
                         </ul>
                     </li>
                 </ul>
-                <div className="text-gray-700 text-sm mb-2">
+                <div className="text-gray-700 text-sm font-bold mb-2">
                     The{" "}
-                    <span className="font-bold text-green-700">
+                    <span className="text-green-700">
                         “Cool Corners of Carnegie”
                     </span>{" "}
                     category are common hangout and work spaces such as Hunt
@@ -182,11 +185,9 @@ function About() {
                     <li>Floor 1: Color Printer</li>
                     <li>Floor 3: Power Banks</li>
                 </ul>
-                <div className="text-gray-700 text-sm mb-2">
+                <div className="text-gray-700 text-sm font-bold mb-2">
                     The{" "}
-                    <span className="font-bold text-blue-700">
-                        “Campus of Bridges”
-                    </span>{" "}
+                    <span className="text-blue-700">“Campus of Bridges”</span>{" "}
                     category is related to bridges and building connections
                     around campus, such as Pausch Bridge and the Wean-Doherty
                     hallways.
@@ -201,26 +202,21 @@ function About() {
                     <li>Hamerschlag &lt;—&gt; Wean 4</li>
                     <li>Friends of Engineering Bridge</li>
                 </ul>
-                <div className="text-gray-700 text-sm mb-2">
-                    The{" "}
-                    <span className="font-bold text-yellow-700">
-                        “Let’s Eat”
-                    </span>{" "}
+                <div className="text-gray-700 text-sm font-bold mb-2">
+                    The <span className="text-yellow-700">“Let’s Eat”</span>{" "}
                     category takes first-years to the dining locations on
                     campus.
                 </div>
-                <div className="text-gray-700 text-sm mb-2">
+                <div className="text-gray-700 text-sm font-bold mb-2">
                     The{" "}
-                    <span className="font-bold text-purple-700">
-                        “Minor-Major General”
-                    </span>{" "}
+                    <span className="text-cyan-500">“Minor-Major General”</span>{" "}
                     category relates to school-specific buildings, and is
                     designed to get first-years to make friends outside of their
                     major.
                 </div>
-                <div className="text-gray-700 text-sm mb-2">
+                <div className="text-gray-700 text-sm font-bold mb-2">
                     The{" "}
-                    <span className="font-bold text-pink-700">
+                    <span className="text-blue-700">
                         “Off-Campus Adventures”
                     </span>{" "}
                     category relates to activities and locations surrounding
