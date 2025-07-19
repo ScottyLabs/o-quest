@@ -3,6 +3,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { Camera, ChevronRight, Gift } from "lucide-react";
 import { useEffect, useState } from "react";
 import CategoryProgressBar from "../components/category-progress-bar";
+import Stamps from "../components/stamps";
 import { Card } from "../components/ui/card";
 
 // Mock function to simulate backend data fetching
@@ -171,6 +172,8 @@ function Profile() {
                     </Link>
                 </div>
             </div>
+
+            <Stamps week={[true, false, false, false, false, false, false]} />
 
             {/* Prizes */}
             <div className="mb-2 flex items-center gap-2">
