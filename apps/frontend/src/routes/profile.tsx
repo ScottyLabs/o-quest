@@ -143,18 +143,27 @@ function Profile() {
             </Card>
 
             {/* Leaderboard Card */}
-            <div className="bg-red-700 rounded-2xl shadow-md flex items-center px-4 py-4 mb-4 text-white relative">
-                <div className="font-bold mr-8">{data.leaderboard.place}</div>
-                <div className="flex-1">
-                    <div className="font-semibold">{data.leaderboard.name}</div>
-                    <div className="text-md">{data.leaderboard.andrewId}</div>
+            <div className="relative">
+                <div className="absolute top-1 left-0 right-0 bottom-0 rounded-2xl bg-gray-400 z-0" />
+                <div className="bg-red-700 rounded-2xl shadow-md flex items-center px-4 py-4 mb-4 text-white z-10 relative">
+                    <div className="font-bold mr-8">
+                        {data.leaderboard.place}
+                    </div>
+                    <div className="flex-1">
+                        <div className="font-semibold">
+                            {data.leaderboard.name}
+                        </div>
+                        <div className="text-md">
+                            {data.leaderboard.andrewId}
+                        </div>
+                    </div>
+                    <div className="text-lg font-bold">
+                        {data.leaderboard.points} ScottyCoins
+                    </div>
+                    <Link to="/leaderboard" className="text-white ml-6">
+                        <ChevronRight />
+                    </Link>
                 </div>
-                <div className="text-lg font-bold">
-                    {data.leaderboard.points} Pts
-                </div>
-                <Link to="/leaderboard" className="text-white ml-6">
-                    <ChevronRight />
-                </Link>
             </div>
 
             {/* Prizes */}
