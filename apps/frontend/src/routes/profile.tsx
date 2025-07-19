@@ -144,7 +144,7 @@ function Profile() {
 
             {/* Leaderboard Card */}
             <div className="relative">
-                <div className="absolute top-1 left-0 right-0 bottom-0 rounded-2xl bg-gray-400 z-0" />
+                <div className="absolute h-5 top-17 left-0 right-0 bottom-0 rounded-b-2xl bg-[#aba89b] z-0" />
                 <div className="bg-red-700 rounded-2xl shadow-md flex items-center px-4 py-4 mb-4 text-white z-10 relative">
                     <div className="font-bold mr-8">
                         {data.leaderboard.place}
