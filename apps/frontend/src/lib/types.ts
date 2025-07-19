@@ -31,6 +31,7 @@ export type UserProfile = {
     totalChallenges: number;
     leaderboard: LeaderboardUser;
     gallery: ImageInfo[];
+    prizes: ImageInfo[];
 };
 
 export type Challenge = {

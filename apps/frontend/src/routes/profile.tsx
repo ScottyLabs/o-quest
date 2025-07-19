@@ -1,6 +1,6 @@
 import type { UserProfile } from "@/lib/types";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { Camera, ChevronRight } from "lucide-react";
+import { Camera, ChevronRight, Gift } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Card } from "../components/ui/card";
 
@@ -28,6 +28,21 @@ function useProfileData(): UserProfile | null {
                     points: 33,
                 },
                 gallery: [
+                    // Placeholder images
+                    {
+                        id: "1",
+                        title: "Sample Image",
+                        src: "/images/onboarding-images/placeholder.svg",
+                        alt: "Sample placeholder image",
+                    },
+                    {
+                        id: "2",
+                        title: "Sample Image 1",
+                        src: "/images/onboarding-images/placeholder.svg",
+                        alt: "Sample placeholder image",
+                    },
+                ],
+                prizes: [
                     // Placeholder images
                     {
                         id: "1",
@@ -140,6 +155,24 @@ function Profile() {
                 <Link to="/leaderboard" className="text-white ml-6">
                     <ChevronRight />
                 </Link>
+            </div>
+
+            {/* Prizes */}
+            <div className="mb-2 flex items-center gap-2">
+                <Gift className="w-6 h-6 text-red-700" />
+                <span className="font-semibold text-lg">Prizes</span>
+            </div>
+            <div className="flex-1 overflow-x-auto mb-4">
+                <div className="flex gap-2 pb-4 h-64">
+                    {data.prizes.map((img) => (
+                        <img
+                            key={img.id}
+                            src={img.src}
+                            alt={img.alt}
+                            className="w-80 h-64 object-cover rounded-xl border flex-shrink-0"
+                        />
+                    ))}
+                </div>
             </div>
 
             {/* Gallery */}
