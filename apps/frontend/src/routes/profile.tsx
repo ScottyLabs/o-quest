@@ -81,7 +81,7 @@ function Profile() {
     return (
         <div className="bg-[#F3E9D2] min-h-screen pb-20 max-w-md mx-auto p-4 flex flex-col">
             {/* Profile Card */}
-            <Card className="rounded-4xl shadow-[0_3px_0_#bbb] p-4 mb-4 mt-4 relative overflow-visible">
+            <Card className="rounded-4xl shadow-[0_7px_0_#bbb] p-4 mb-6 mt-4 relative overflow-visible">
                 {/* Decorative SVG at the top */}
                 <div
                     className="w-full flex justify-center -mt-8 mb-2"
@@ -148,6 +148,22 @@ function Profile() {
                         ]}
                     />
                 </div>
+
+                {/* Points Information */}
+                <div className="mt-4 space-y-2">
+                    <div className="flex justify-between items-center">
+                        <span>Total Scotty Coins:</span>
+                        <span className="font-bold">
+                            {data.totalScottyCoins}
+                        </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                        <span>Carnegie Cup Points:</span>
+                        <span className="font-bold">
+                            {data.leaderboard.points}
+                        </span>
+                    </div>
+                </div>
             </Card>
 
             {/* Leaderboard Card */}
@@ -181,7 +197,7 @@ function Profile() {
             <Stamps week={[true, false, false, false, false, false, false]} />
 
             {/* Prizes */}
-            <div className="mb-2 flex items-center gap-2">
+            <div className="mt-2 mb-2 flex items-center gap-2">
                 <Gift className="w-6 h-6 text-red-700" />
                 <span className="font-semibold text-lg">Prizes</span>
             </div>
