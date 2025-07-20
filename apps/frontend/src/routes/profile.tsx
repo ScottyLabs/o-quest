@@ -164,8 +164,13 @@ function Profile() {
                             {data.leaderboard.andrewId}
                         </div>
                     </div>
-                    <div className="text-lg font-bold">
-                        {data.leaderboard.points} ScottyCoins
+                    <div className="text-lg font-bold flex items-center gap-2">
+                        {data.leaderboard.points}
+                        <img
+                            src="/images/scotty-coin.svg"
+                            alt="ScottyCoin"
+                            className="w-7 h-7 relative top-1"
+                        />
                     </div>
                     <Link to="/leaderboard" className="text-white ml-6">
                         <ChevronRight />

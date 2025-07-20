@@ -44,8 +44,13 @@ export function LeaderboardCard({
             </div>
             {/* Points & Right Arrow */}
             <div className="flex items-center gap-1.5 ml-1.5">
-                <span className="font-semibold text-base">
-                    {points} ScottyCoins
+                <span className="font-semibold text-base flex items-center gap-1">
+                    {points}
+                    <img
+                        src="/images/scotty-coin.svg"
+                        alt="ScottyCoin"
+                        className="w-7 h-7 relative top-1"
+                    />
                 </span>
                 {/* Right Arrow Icon */}
                 <ChevronRight className="w-5 h-5 opacity-60" />
