@@ -19,7 +19,7 @@ const steps: Step[] = [
         title: "Explore Campus",
         description:
             "Even more cool subheading which will not be read by the user",
-        image: "/images/onboarding-images/placeholder.svg",
+        image: "/images/onboarding-images/cmu-logo.svg",
         button: "Next",
         action: "next",
     },
@@ -34,7 +34,7 @@ const steps: Step[] = [
         title: "Reap Rewards",
         description:
             "Trade Scotty Coin at the Terrier Trade to earn swag, rewards, and more",
-        image: "/images/onboarding-images/placeholder.svg",
+        image: "/images/onboarding-images/terrier-trade-card-placeholder.svg",
         button: "Log In",
         action: "login",
     },
@@ -43,6 +43,10 @@ const steps: Step[] = [
 function Onboarding() {
     const [currentStep, setCurrentStep] = useState(0);
     const navigate = useNavigate();
+    const [imgSize, setImgSize] = useState<{
+        width: number;
+        height: number;
+    } | null>(null);
 
     // Check if user has completed onboarding on component mount
     useEffect(() => {
@@ -82,7 +86,28 @@ function Onboarding() {
                 <img
                     src={image}
                     alt={title}
-                    className="w-37 h-37 object-contain mb-8"
+                    style={
+                        imgSize
+                            ? {
+                                  width: imgSize.width,
+                                  height: imgSize.height,
+                                  objectFit: "contain",
+                                  marginBottom: "2rem",
+                              }
+                            : {
+                                  maxWidth: 300,
+                                  maxHeight: 240,
+                                  objectFit: "contain",
+                                  marginBottom: "2rem",
+                              }
+                    }
+                    onLoad={(e) => {
+                        const { naturalWidth, naturalHeight } = e.currentTarget;
+                        setImgSize({
+                            width: naturalWidth,
+                            height: naturalHeight,
+                        });
+                    }}
                 />
                 {/* Title */}
                 <h2 className="text-2xl font-medium mb-2 text-center">
