@@ -1,10 +1,17 @@
 import { Button } from "@/components/ui/button";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import {
+    createFileRoute,
+    useNavigate,
+    useSearch,
+} from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/onboarding")({
     component: Onboarding,
+    validateSearch: (search) => ({
+        from: search.from as string | undefined,
+    }),
 });
 
 interface Step {
@@ -42,6 +49,9 @@ const steps: Step[] = [
 ];
 
 function Onboarding() {
+    const { from } = useSearch({ from: "/onboarding" });
+    const isFromAbout = from === "about";
+
     const [currentStep, setCurrentStep] = useState(0);
     const navigate = useNavigate();
     const [imgSize, setImgSize] = useState<{
@@ -51,13 +61,15 @@ function Onboarding() {
 
     // Check if user has completed onboarding on component mount
     useEffect(() => {
-        const hasCompletedOnboarding = localStorage.getItem(
-            "onboardingCompleted",
-        );
-        if (hasCompletedOnboarding === "true") {
-            navigate({ to: "/" });
+        if (!isFromAbout) {
+            const hasCompletedOnboarding = localStorage.getItem(
+                "onboardingCompleted",
+            );
+            if (hasCompletedOnboarding === "true") {
+                navigate({ to: "/" });
+            }
         }
-    }, [navigate]);
+    }, [navigate, isFromAbout]);
 
     const nextStep = () =>
         setCurrentStep((s) => Math.min(s + 1, steps.length - 1));
@@ -163,7 +175,9 @@ function Onboarding() {
                     className="w-full h-12 bg-red-700 text-white rounded-3xl text-lg font-medium font-bold mb-2 transition hover:bg-red-800"
                     type="button"
                 >
-                    {button}
+                    {isFromAbout && currentStep === steps.length - 1
+                        ? "End Tutorial"
+                        : button}
                 </Button>
             </div>
         </div>
