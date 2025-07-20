@@ -117,11 +117,11 @@ function Profile() {
                 </div>
 
                 {/* Progress Bars */}
-                <div className="mt-1">
+                <div className="mb-1">
                     <div className="font-semibold text-md">
                         Completed Quests:
                     </div>
-                    <div className="w-full h-4 bg-gray-700 rounded-full mt-1 mb-2 relative">
+                    <div className="w-full h-4 bg-gray-700 rounded-full mt-1 mb-4 relative">
                         <div
                             className="h-4 bg-blue-500 rounded-full absolute top-0 left-0"
                             style={{
@@ -150,7 +150,7 @@ function Profile() {
                 </div>
 
                 {/* Points Information */}
-                <div className="mt-4 space-y-2">
+                <div className="space-y-1">
                     <div className="flex justify-between items-center">
                         <span>Total Scotty Coins:</span>
                         <span className="font-bold">

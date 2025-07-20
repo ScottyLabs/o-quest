@@ -19,7 +19,7 @@ const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
 function CategoryProgressBar({ categories }: CategoryProgressBarProps) {
     return (
-        <div className="bg-[#111] rounded-2xl p-2 px-3 flex gap-3 justify-center items-center shadow-[0_7px_0_#bbb] my-4">
+        <div className="bg-[#111] rounded-2xl p-2 px-3 flex gap-3 justify-center items-center shadow-[0_7px_0_#bbb]">
             {categories.slice(0, 7).map(({ name, percentage }, i) => {
                 const dash = (percentage / 100) * CIRCUMFERENCE;
                 return (
