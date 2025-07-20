@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { ChevronLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/onboarding")({
@@ -80,6 +81,33 @@ function Onboarding() {
 
     return (
         <div className="min-h-screen bg-white flex flex-col">
+            {/* Top bar with Back and Skip */}
+            <div className="flex items-center justify-between px-4 pt-6 pb-2">
+                {/* Back button (only show if not first step) */}
+                {currentStep > 0 ? (
+                    <button
+                        onClick={prevStep}
+                        className="flex items-center text-gray-700 hover:bg-gray-100 rounded-full p-2 transition"
+                        aria-label="Back"
+                        type="button"
+                    >
+                        <ChevronLeft size={24} />
+                    </button>
+                ) : (
+                    <div style={{ width: 40 }} />
+                )}
+                {/* Skip button */}
+                <button
+                    onClick={() => {
+                        localStorage.setItem("onboardingCompleted", "true");
+                        navigate({ to: "/" });
+                    }}
+                    className="text-gray-500 hover:text-red-700 font-medium transition px-2 py-1"
+                    type="button"
+                >
+                    Skip
+                </button>
+            </div>
             {/* Scrollable content area */}
             <div className="flex-1 overflow-y-auto flex flex-col items-center justify-center px-8">
                 {/* Image */}
@@ -128,7 +156,7 @@ function Onboarding() {
                 </div>
             </div>
 
-            {/* Buttons */}
+            {/* Next button */}
             <div className="px-8 pb-8 shrink-0">
                 <Button
                     onClick={handleStepAction}
@@ -137,16 +165,6 @@ function Onboarding() {
                 >
                     {button}
                 </Button>
-                {currentStep > 0 && (
-                    <Button
-                        onClick={prevStep}
-                        variant="ghost"
-                        className="w-full py-2 text-gray-500 text-base font-normal transition hover:bg-gray-100"
-                        type="button"
-                    >
-                        Back
-                    </Button>
-                )}
             </div>
         </div>
     );
