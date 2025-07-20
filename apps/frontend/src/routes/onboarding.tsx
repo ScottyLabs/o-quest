@@ -18,7 +18,7 @@ const steps: Step[] = [
     {
         title: "Explore Campus",
         description:
-            "Even more cool subheading which will not be read by the user",
+            "Create Your Own Adventure: Explore with your friends, learn about campus life, and take fun photos!",
         image: "/images/onboarding-images/cmu-logo.svg",
         button: "Next",
         action: "next",
