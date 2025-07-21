@@ -3,7 +3,9 @@
     "version": "1.0.50",
     "scripts": {
         "dev": "bun run --watch src/index.ts",
-        "start": "bun run src/index.ts"
+        "start": "bun run src/index.ts",
+        "build": "drizzle-kit push",
+        "seed": "bun run src/db/seed.ts"
     },
     "dependencies": {
         "@elysiajs/swagger": "^1.3.0",
