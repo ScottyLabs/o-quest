@@ -34,7 +34,8 @@ export const app = new Elysia()
     .group("/api", (app) =>
         app
             .get("/challenges", getAllChallenges)
-            .get("/challenges-temp", getAllChallenges_temp),
+            .get("/challenges-temp", getAllChallenges_temp)
+            .get("/leaderboard", getLeaderboard),
     )
 
     // Private API routes
@@ -50,7 +51,6 @@ export const app = new Elysia()
             )
             .get("/coins", getUserCoins)
             .get("/completed", getCompletedChallenges)
-            .get("/leaderboard", getLeaderboard)
             .get("/trades", getUserTrades)
             .post("/trades/:rewardId", makeTrade),
     );
