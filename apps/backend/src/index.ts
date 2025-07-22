@@ -13,7 +13,7 @@ import { getLeaderboard } from "@/handlers/leaderboard";
 import { getUserTrades, makeTrade } from "@/handlers/trades";
 import { swagger } from "@elysiajs/swagger";
 
-const PORT = 3000;
+const PORT = Number.parseInt(process.env.PORT || "3000");
 
 const JWKS_URI = process.env.JWKS_URI;
 const ISSUER = process.env.ISSUER;
