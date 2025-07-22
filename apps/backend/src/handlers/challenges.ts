@@ -3,6 +3,8 @@ import { challenges, completion } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import type { AuthenticatedContext } from "../../context";
 
+export const getAllChallenges_temp = () => db.select().from(challenges);
+
 export const getAllChallenges = async () => {
     const allChallenges = await db.select().from(challenges);
     const now = new Date();

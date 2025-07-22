@@ -1,6 +1,7 @@
 import "dotenv/config";
 import {
     getAllChallenges,
+    getAllChallenges_temp,
     getCompletedChallenges,
 } from "@/handlers/challenges";
 import { getUserCoins } from "@/handlers/coins";
@@ -25,8 +26,12 @@ export const app = new Elysia()
     .get("/health", () => "OK")
     .get("/", () => "Hello Elysia")
 
-    // Public API routes
-    .group("/api", (app) => app.get("/challenges", getAllChallenges))
+    // Public API routes")
+    .group("/api", (app) =>
+        app
+            .get("/challenges", getAllChallenges)
+            .get("/challenges-temp", getAllChallenges_temp),
+    )
 
     // Private API routes
     .group("/api", (app) =>
