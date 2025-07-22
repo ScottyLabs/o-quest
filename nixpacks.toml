@@ -5,7 +5,7 @@ nixPkgs = ["bun"]
 cmds = ["cd apps/backend && bun install --frozen-lockfile"]
 
 [phases.start]
-cmd = "cd apps/backend && bun run start"
+cmds = ["cd apps/backend && bun run start"]
 
 [variables]
 PORT = "3000"
