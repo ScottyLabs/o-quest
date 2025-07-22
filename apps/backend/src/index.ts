@@ -1,3 +1,9 @@
+import "dotenv/config";
+import {
+    getAllChallenges,
+    getCompletedChallenges,
+} from "@/handlers/challenges";
+import { getUserCoins } from "@/handlers/coins";
 import { swagger } from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { oauth2ResourceServer } from "elysia-oauth2-resource-server";
@@ -19,6 +25,10 @@ export const app = new Elysia()
     .get("/health", () => "OK")
     .get("/", () => "Hello Elysia")
 
+    // Public API routes
+    .group("/api", (app) => app.get("/challenges", getAllChallenges))
+
+    // Private API routes
     .group("/api", (app) =>
         app
             .use(
@@ -29,9 +39,8 @@ export const app = new Elysia()
                     requiredScopes: ["openid", "profile", "email"],
                 }),
             )
-            .get("/auth", ({ auth }) => {
-                return { userId: auth.sub };
-            }),
+            .get("/coins", getUserCoins)
+            .get("/completed", getCompletedChallenges),
     );
 
 if (import.meta.main) {

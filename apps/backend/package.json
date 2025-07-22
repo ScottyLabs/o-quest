@@ -13,6 +13,7 @@
         "drizzle-orm": "^0.44.2",
         "elysia": "latest",
         "elysia-oauth2-resource-server": "^0.1.1",
+        "jose": "^6.0.12",
         "pg": "^8.16.0"
     },
     "devDependencies": {
