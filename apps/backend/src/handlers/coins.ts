@@ -3,13 +3,7 @@ import { challenges, completion, reward, trade } from "@/db/schema";
 import { eq, sum } from "drizzle-orm";
 import type { AuthenticatedContext } from "../../context";
 
-export const getUserCoins = async ({ auth }: AuthenticatedContext) => {
-    const userId = auth.sub;
-
-    if (!userId) {
-        throw new Error("User ID not found in authentication context");
-    }
-
+export const getCoinsForUser = async (userId: string) => {
     // Calculate total coins earned from completed challenges
     const coinsEarned = await db
         .select({
@@ -30,11 +24,20 @@ export const getUserCoins = async ({ auth }: AuthenticatedContext) => {
 
     const totalEarned = Number.parseInt(coinsEarned[0]?.total ?? "0");
     const totalSpent = Number.parseInt(coinsSpent[0]?.total ?? "0");
-    const currentBalance = totalEarned - totalSpent;
 
     return {
-        coins: currentBalance,
+        coins: totalEarned - totalSpent,
         earned: totalEarned,
         spent: totalSpent,
     };
+};
+
+export const getUserCoins = async ({ auth }: AuthenticatedContext) => {
+    const userId = auth.sub;
+
+    if (!userId) {
+        throw new Error("User ID not found in authentication context");
+    }
+
+    return getCoinsForUser(userId);
 };

@@ -1,13 +1,17 @@
 import "dotenv/config";
+
+import { Elysia } from "elysia";
+import { oauth2ResourceServer } from "elysia-oauth2-resource-server";
+
 import {
     getAllChallenges,
     getAllChallenges_temp,
     getCompletedChallenges,
 } from "@/handlers/challenges";
 import { getUserCoins } from "@/handlers/coins";
+import { getLeaderboard } from "@/handlers/leaderboard";
+import { getUserTrades, makeTrade } from "@/handlers/trades";
 import { swagger } from "@elysiajs/swagger";
-import { Elysia } from "elysia";
-import { oauth2ResourceServer } from "elysia-oauth2-resource-server";
 
 const PORT = 3000;
 
@@ -24,9 +28,9 @@ if (!JWKS_URI || !ISSUER || !AUDIENCE) {
 export const app = new Elysia()
     .use(swagger())
     .get("/health", () => "OK")
-    .get("/", () => "Hello Elysia")
+    .get("/", () => "Hello world")
 
-    // Public API routes")
+    // Public API routes
     .group("/api", (app) =>
         app
             .get("/challenges", getAllChallenges)
@@ -45,7 +49,10 @@ export const app = new Elysia()
                 }),
             )
             .get("/coins", getUserCoins)
-            .get("/completed", getCompletedChallenges),
+            .get("/completed", getCompletedChallenges)
+            .get("/leaderboard", getLeaderboard)
+            .get("/trades", getUserTrades)
+            .post("/trades/:rewardId", makeTrade),
     );
 
 if (import.meta.main) {
