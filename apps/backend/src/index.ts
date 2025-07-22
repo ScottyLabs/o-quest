@@ -4,24 +4,35 @@ import { oauth2ResourceServer } from "elysia-oauth2-resource-server";
 
 const PORT = 3000;
 
-if (!process.env.JWKS_URI || !process.env.ISSUER || !process.env.AUDIENCE) {
+const JWKS_URI = process.env.JWKS_URI;
+const ISSUER = process.env.ISSUER;
+const AUDIENCE = process.env.AUDIENCE;
+
+if (!JWKS_URI || !ISSUER || !AUDIENCE) {
     throw new Error(
         "Environment variables JWKS_URI, ISSUER, and AUDIENCE are required",
     );
 }
 
 export const app = new Elysia()
-    .use(
-        oauth2ResourceServer({
-            jwksUri: process.env.JWKS_URI,
-            issuer: process.env.ISSUER,
-            audience: process.env.AUDIENCE,
-            requiredScopes: ["openid", "profile", "email"],
-        }),
-    )
     .use(swagger())
     .get("/health", () => "OK")
-    .get("/", () => "Hello Elysia");
+    .get("/", () => "Hello Elysia")
+
+    .group("/api", (app) =>
+        app
+            .use(
+                oauth2ResourceServer({
+                    jwksUri: JWKS_URI,
+                    issuer: ISSUER,
+                    audience: AUDIENCE,
+                    requiredScopes: ["openid", "profile", "email"],
+                }),
+            )
+            .get("/auth", ({ auth }) => {
+                return { userId: auth.sub };
+            }),
+    );
 
 if (import.meta.main) {
     app.listen(PORT);
