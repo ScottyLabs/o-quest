@@ -31,7 +31,27 @@ if (!JWKS_URI || !ISSUER || !AUDIENCE) {
 }
 
 export const app = new Elysia()
-    .use(swagger())
+    .use(
+        swagger({
+            documentation: {
+                info: {
+                    title: "O-Quest API",
+                    version: "1.0.0",
+                    description: "O-Quest backend API",
+                },
+                components: {
+                    securitySchemes: {
+                        BearerAuth: {
+                            type: "http",
+                            scheme: "bearer",
+                            bearerFormat: "JWT",
+                            description: "Enter your JWT Bearer token ",
+                        },
+                    },
+                },
+            },
+        }),
+    )
     .get("/", () => "OK", {
         detail: {
             summary: "Health check",
@@ -49,6 +69,7 @@ export const app = new Elysia()
                     description:
                         "Retrieve all challenges with unlock status. Locked challenges return limited information",
                     tags: ["Challenges"],
+                    security: [],
                 },
             })
             .get("/challenges-temp", getAllChallenges_temp, {
@@ -57,6 +78,7 @@ export const app = new Elysia()
                     description:
                         "Retrieve all challenges without unlock filtering for development/testing",
                     tags: ["Challenges"],
+                    security: [],
                 },
             })
             .get("/leaderboard", getLeaderboard, {
@@ -74,6 +96,7 @@ export const app = new Elysia()
                             description: "Page number for pagination",
                         },
                     ],
+                    security: [],
                 },
             }),
     )
@@ -95,6 +118,20 @@ export const app = new Elysia()
                     description:
                         "Retrieve the authenticated user's coin balance, earned, and spent amounts",
                     tags: ["Coins"],
+                    security: [{ BearerAuth: [] }],
+                    responses: {
+                        200: {
+                            description:
+                                "User's coin information retrieved successfully",
+                        },
+                        401: {
+                            description:
+                                "Unauthorized - Missing or invalid JWT token",
+                        },
+                        403: {
+                            description: "Forbidden - Insufficient scopes",
+                        },
+                    },
                 },
             })
             .get("/completed", getCompletedChallenges, {
@@ -103,6 +140,20 @@ export const app = new Elysia()
                     description:
                         "Retrieve list of challenges completed by the authenticated user",
                     tags: ["Challenges"],
+                    security: [{ BearerAuth: [] }],
+                    responses: {
+                        200: {
+                            description:
+                                "Completed challenges retrieved successfully",
+                        },
+                        401: {
+                            description:
+                                "Unauthorized - Missing or invalid JWT token",
+                        },
+                        403: {
+                            description: "Forbidden - Insufficient scopes",
+                        },
+                    },
                 },
             })
             .get("/trades", getUserTrades, {
@@ -111,6 +162,19 @@ export const app = new Elysia()
                     description:
                         "Retrieve all trades/purchases made by the authenticated user",
                     tags: ["Trades"],
+                    security: [{ BearerAuth: [] }],
+                    responses: {
+                        200: {
+                            description: "User's trades retrieved successfully",
+                        },
+                        401: {
+                            description:
+                                "Unauthorized - Missing or invalid JWT token",
+                        },
+                        403: {
+                            description: "Forbidden - Insufficient scopes",
+                        },
+                    },
                 },
             })
             .post("/trades/:rewardId", makeTrade, {
@@ -118,6 +182,7 @@ export const app = new Elysia()
                     summary: "Make a trade",
                     description: "Purchase a reward using ScottyCoins",
                     tags: ["Trades"],
+                    security: [{ BearerAuth: [] }],
                     parameters: [
                         {
                             name: "rewardId",
@@ -145,6 +210,25 @@ export const app = new Elysia()
                             },
                         },
                     },
+                    responses: {
+                        200: {
+                            description: "Trade completed successfully",
+                        },
+                        400: {
+                            description:
+                                "Bad request - Invalid parameters or insufficient coins",
+                        },
+                        401: {
+                            description:
+                                "Unauthorized - Missing or invalid JWT token",
+                        },
+                        403: {
+                            description: "Forbidden - Insufficient scopes",
+                        },
+                        404: {
+                            description: "Reward not found",
+                        },
+                    },
                 },
             })
             .post("/complete", completeChallenge, {
@@ -153,6 +237,7 @@ export const app = new Elysia()
                     description:
                         "Mark a challenge as completed with optional photo and note",
                     tags: ["Challenges"],
+                    security: [{ BearerAuth: [] }],
                     requestBody: {
                         content: {
                             "application/json": {
@@ -183,6 +268,26 @@ export const app = new Elysia()
                             },
                         },
                     },
+                    responses: {
+                        200: {
+                            description: "Challenge completed successfully",
+                        },
+                        400: {
+                            description:
+                                "Bad request - Invalid challenge or verification",
+                        },
+                        401: {
+                            description:
+                                "Unauthorized - Missing or invalid JWT token",
+                        },
+                        403: {
+                            description: "Forbidden - Insufficient scopes",
+                        },
+                        409: {
+                            description:
+                                "Conflict - Challenge already completed",
+                        },
+                    },
                 },
             })
             .get("/journal/:challengeId", getJournalEntry, {
@@ -191,6 +296,7 @@ export const app = new Elysia()
                     description:
                         "Retrieve photo and note for a completed challenge",
                     tags: ["Journal"],
+                    security: [{ BearerAuth: [] }],
                     parameters: [
                         {
                             name: "challengeId",
@@ -199,6 +305,22 @@ export const app = new Elysia()
                             schema: { type: "string" },
                         },
                     ],
+                    responses: {
+                        200: {
+                            description: "Journal entry retrieved successfully",
+                        },
+                        401: {
+                            description:
+                                "Unauthorized - Missing or invalid JWT token",
+                        },
+                        403: {
+                            description: "Forbidden - Insufficient scopes",
+                        },
+                        404: {
+                            description:
+                                "Journal entry not found or challenge not completed",
+                        },
+                    },
                 },
             })
             .get("/journal", getAllJournalEntries, {
@@ -207,6 +329,20 @@ export const app = new Elysia()
                     description:
                         "Retrieve all completed challenges for the user",
                     tags: ["Journal"],
+                    security: [{ BearerAuth: [] }],
+                    responses: {
+                        200: {
+                            description:
+                                "All journal entries retrieved successfully",
+                        },
+                        401: {
+                            description:
+                                "Unauthorized - Missing or invalid JWT token",
+                        },
+                        403: {
+                            description: "Forbidden - Insufficient scopes",
+                        },
+                    },
                 },
             }),
     );
