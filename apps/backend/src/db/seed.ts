@@ -1,3 +1,4 @@
+import { randomBytes } from "node:crypto";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { db } from "@/db";
@@ -63,10 +64,14 @@ async function seed() {
                 description: record.Description,
                 moreInfoLink: record["More Info Link"],
                 unlockTimestamp: unlockDate,
+                secret: randomBytes(32).toString("hex"),
             };
         });
 
+        // Clear existing challenges and insert new ones
+        await db.delete(challenges).execute();
         await db.insert(challenges).values(challengeData);
+
         console.log(`Inserting ${challengeData.length} challenges`);
     } catch (error) {
         console.error("Error seeding challenges:", error);
@@ -75,6 +80,5 @@ async function seed() {
 }
 
 if (import.meta.main) {
-    await seed();
-    console.log("Done seeding challenges");
+    await seed().then(() => console.log("Done seeding challenges"));
 }

@@ -29,6 +29,7 @@ export const challenges = pgTable("challenges", {
     description: text("description").notNull(),
     moreInfoLink: text("moreInfoLink"), // optional
     unlockTimestamp: timestamp("unlockTimestamp").notNull(),
+    secret: text("secret").notNull(),
 });
 
 export const completion = pgTable(

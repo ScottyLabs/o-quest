@@ -3,10 +3,24 @@ import { challenges, completion } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import type { AuthenticatedContext } from "../../context";
 
-export const getAllChallenges_temp = () => db.select().from(challenges);
+export const getAllChallenges_temp = () =>
+    db
+        .select({
+            name: challenges.name,
+            category: challenges.category,
+            location: challenges.location,
+            scottyCoins: challenges.scottyCoins,
+            mapsLink: challenges.mapsLink,
+            tagline: challenges.tagline,
+            description: challenges.description,
+            moreInfoLink: challenges.moreInfoLink,
+            unlockTimestamp: challenges.unlockTimestamp,
+            // exclude secret from public API
+        })
+        .from(challenges);
 
 export const getAllChallenges = async () => {
-    const allChallenges = await db.select().from(challenges);
+    const allChallenges = await getAllChallenges_temp();
     const now = new Date();
 
     return allChallenges.map((challenge) => {

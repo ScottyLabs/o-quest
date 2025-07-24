@@ -8,7 +8,7 @@ interface CompleteRequest {
     challengeId: string;
     photoBlob?: string; // base64 encoded image
     note?: string;
-    verification: string; // currently unused
+    verification: string;
 }
 
 interface CompleteContext extends AuthenticatedContext {
@@ -23,15 +23,27 @@ export const completeChallenge = async ({ auth, body }: CompleteContext) => {
         throw new Error("User ID not found in token");
     }
 
-    // Verify challenge exists
+    // Verify challenge exists and get its secret
     const challenge = await db
-        .select()
+        .select({
+            name: challenges.name,
+            secret: challenges.secret,
+            scottyCoins: challenges.scottyCoins,
+            unlockTimestamp: challenges.unlockTimestamp,
+        })
         .from(challenges)
         .where(eq(challenges.name, challengeId))
         .limit(1);
 
     if (challenge.length === 0) {
         throw new Error("Challenge not found");
+    }
+
+    const challengeData = challenge[0];
+
+    // Verify the secret matches
+    if (challengeData.secret !== verification) {
+        throw new Error("Invalid verification code");
     }
 
     // Check if challenge is unlocked (current time >= unlock time)
