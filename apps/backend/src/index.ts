@@ -1,5 +1,6 @@
 import "dotenv/config";
 
+import { swagger } from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { oauth2ResourceServer } from "elysia-oauth2-resource-server";
 
@@ -16,7 +17,6 @@ import {
 } from "@/handlers/completion";
 import { getLeaderboard } from "@/handlers/leaderboard";
 import { getUserTrades, makeTrade } from "@/handlers/trades";
-import { swagger } from "@elysiajs/swagger";
 
 const PORT = Number.parseInt(process.env.PORT || "3000");
 
