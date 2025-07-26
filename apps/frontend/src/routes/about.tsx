@@ -12,23 +12,75 @@ interface Contributor {
     firstName: string;
     lastName: string;
     role: string;
-    isPastContributor?: boolean;
+    major: string;
+    grad_year: number;
+    contribution_year: number;
 }
 
 const contributors: Contributor[] = [
-    { firstName: "Jane", lastName: "Doe", role: "Developer" },
-    { firstName: "John", lastName: "Smith", role: "Designer" },
     {
-        firstName: "Alice",
-        lastName: "Brown",
-        role: "Writer",
-        isPastContributor: true,
+        firstName: "Kenechukwu",
+        lastName: "Echezona",
+        role: "Developer",
+        major: "SCS",
+        grad_year: 2026,
+        contribution_year: 2025,
     },
     {
-        firstName: "Bob",
-        lastName: "Green",
-        role: "Illustrator",
-        isPastContributor: true,
+        firstName: "Yuxiang",
+        lastName: "Huang",
+        role: "Developer",
+        major: "IS",
+        grad_year: 2027,
+        contribution_year: 2025,
+    },
+    {
+        firstName: "Xavier",
+        lastName: "Lien",
+        role: "Developer",
+        major: "SCS",
+        grad_year: 2027,
+        contribution_year: 2025,
+    },
+    {
+        firstName: "Anish",
+        lastName: "Pallati",
+        role: "Developer",
+        major: "MCS",
+        grad_year: 2028,
+        contribution_year: 2025,
+    },
+    {
+        firstName: "Autumn",
+        lastName: "Qiu",
+        role: "Developer",
+        major: "IS",
+        grad_year: 2027,
+        contribution_year: 2025,
+    },
+    {
+        firstName: "Theo",
+        lastName: "Urban",
+        role: "Developer",
+        major: "SCS",
+        grad_year: 2026,
+        contribution_year: 2025,
+    },
+    {
+        firstName: "Jeffery",
+        lastName: "Wang",
+        role: "Developer",
+        major: "BXA",
+        grad_year: 2027,
+        contribution_year: 2025,
+    },
+    {
+        firstName: "Eric",
+        lastName: "Xu",
+        role: "Developer",
+        major: "SCS",
+        grad_year: 2027,
+        contribution_year: 2025,
     },
 ];
 
@@ -39,13 +91,29 @@ export const Route = createFileRoute("/about")({
 function About() {
     const navigate = useNavigate();
 
+    const currentYear = new Date().getFullYear();
+
     const currentTeam = contributors
-        .filter((c) => !c.isPastContributor)
+        .filter((c) => c.contribution_year === currentYear)
         .sort((a, b) => a.lastName.localeCompare(b.lastName));
 
     const pastContributors = contributors
-        .filter((c) => c.isPastContributor)
+        .filter((c) => c.contribution_year < currentYear)
         .sort((a, b) => a.lastName.localeCompare(b.lastName));
+
+    // Group past contributors by contribution year
+    const groupByContributionYear = (contributors: Contributor[]) => {
+        const grouped: { [key: number]: Contributor[] } = {};
+        for (const c of contributors) {
+            if (!grouped[c.contribution_year]) {
+                grouped[c.contribution_year] = [];
+            }
+            grouped[c.contribution_year]?.push(c);
+        }
+        return grouped;
+    };
+
+    const pastContributorsByYear = groupByContributionYear(pastContributors);
 
     return (
         <div className="bg-white min-h-screen max-w-md mx-auto p-4 flex flex-col items-center text-[15px] leading-snug">
@@ -73,21 +141,17 @@ function About() {
                     </DialogHeader>
 
                     {/* Current Team */}
-                    <div className="mt-4">
+                    <div className="mt-2">
                         <h2 className="text-xl font-semibold text-center mb-2">
-                            2025 Team
+                            {currentYear} Team
                         </h2>
-                        <div className="grid grid-cols-2 gap-2 text-sm font-semibold">
-                            <span className="text-center">Name</span>
-                            <span className="text-center">Role</span>
-                        </div>
                         <div className="grid grid-cols-2 gap-2 mt-2">
                             {currentTeam.map((c) => (
                                 <div
                                     key={`${c.firstName}-${c.lastName}-${c.role}`}
                                     className="contents"
                                 >
-                                    <div className="text-center">{`${c.firstName} ${c.lastName}`}</div>
+                                    <div className="text-center">{`${c.firstName} ${c.lastName} (${c.major} '${c.grad_year.toString().slice(-2)})`}</div>
                                     <div className="text-center">{c.role}</div>
                                 </div>
                             ))}
@@ -95,26 +159,43 @@ function About() {
                     </div>
 
                     {/* Previous Contributors */}
-                    <div className="mt-6">
-                        <h2 className="text-xl font-semibold text-center mb-2">
-                            Previous Contributors
-                        </h2>
-                        <div className="grid grid-cols-2 gap-2 text-sm font-semibold">
-                            <span className="text-center">Name</span>
-                            <span className="text-center">Role</span>
+                    {Object.keys(pastContributorsByYear).length > 0 && (
+                        <div className="mt-4">
+                            <h2 className="text-xl font-semibold text-center mb-2">
+                                Previous Contributors
+                            </h2>
+                            {Object.entries(pastContributorsByYear)
+                                .sort(
+                                    ([a], [b]) =>
+                                        Number.parseInt(b) - Number.parseInt(a),
+                                )
+                                .map(
+                                    ([year, teamMembers]: [
+                                        string,
+                                        Contributor[],
+                                    ]) => (
+                                        <div key={year} className="mb-4">
+                                            <h3 className="text-lg font-semibold text-center mb-2">
+                                                {year} Team
+                                            </h3>
+                                            <div className="grid grid-cols-2 gap-2 mt-2">
+                                                {teamMembers.map((c) => (
+                                                    <div
+                                                        key={`${c.firstName}-${c.lastName}-${c.role}`}
+                                                        className="contents"
+                                                    >
+                                                        <div className="text-center">{`${c.firstName} ${c.lastName} (${c.major} '${c.grad_year.toString().slice(-2)})`}</div>
+                                                        <div className="text-center">
+                                                            {c.role}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ),
+                                )}
                         </div>
-                        <div className="grid grid-cols-2 gap-2 mt-2">
-                            {pastContributors.map((c) => (
-                                <div
-                                    key={`${c.firstName}-${c.lastName}-${c.role}`}
-                                    className="contents"
-                                >
-                                    <div className="text-center">{`${c.firstName} ${c.lastName}`}</div>
-                                    <div className="text-center">{`${c.role}`}</div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    )}
                 </DialogContent>
             </Dialog>
         </div>
