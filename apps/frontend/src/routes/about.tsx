@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -138,6 +139,9 @@ function About() {
                         <DialogTitle className="text-center text-2xl font-bold">
                             Credits
                         </DialogTitle>
+                        <DialogDescription className="text-center">
+                            Meet the people behind O-Quest
+                        </DialogDescription>
                     </DialogHeader>
 
                     {/* Current Team */}
