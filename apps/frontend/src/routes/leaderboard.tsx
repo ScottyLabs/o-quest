@@ -2,7 +2,7 @@ import { LeaderboardCard } from "@/components/leaderboard-card";
 import { PageHeader } from "@/components/page-header";
 import type { LeaderboardUser } from "@/lib/types";
 import { createFileRoute } from "@tanstack/react-router";
-import { MoreHorizontal } from "lucide-react";
+import { Crown, MoreHorizontal } from "lucide-react";
 
 export const Route = createFileRoute("/leaderboard")({
     component: Leaderboard,
@@ -61,7 +61,7 @@ function Leaderboard() {
         <div className="max-w-md mx-auto">
             <PageHeader
                 title="Leaderboard"
-                infoText="This page shows the students with the most points."
+                icon={<Crown size={40} color="#C8102E" />}
             />
             <div className="bg-white divide-y overflow-hidden">
                 {inTop10 ? (
