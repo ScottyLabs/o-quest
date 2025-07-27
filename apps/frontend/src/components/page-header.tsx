@@ -37,7 +37,7 @@ export function PageHeader({
             style={{ background: bgColor }}
         >
             {/* Top stats row */}
-            <div className="w-full flex flex-row justify-between items-center px-6 pt-8">
+            <div className="w-full flex flex-row justify-between items-center px-6 pt-8 z-1">
                 {/* All Challenges Stat */}
                 <Popover>
                     <PopoverTrigger asChild>
@@ -59,7 +59,7 @@ export function PageHeader({
                 {/* ScottyCoins Stat */}
                 <Link
                     to="/terrier-trade"
-                    className="flex items-center bg-white rounded-full px-3 py-2 shadow text-sm font-bold gap-1 hover:bg-gray-50 transition-colors"
+                    className="flex items-center bg-white rounded-full px-3 py-2 shadow text-sm font-bold gap-1"
                     aria-label="View Coins"
                 >
                     <img
