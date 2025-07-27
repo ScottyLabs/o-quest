@@ -1,13 +1,11 @@
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
+import { useChallengeData } from "@/lib/hooks/use-challenge-data";
 import { Link } from "@tanstack/react-router";
 import { Flag } from "lucide-react";
+import { useState } from "react";
 import type React from "react";
 import headerArc from "/images/header-arc.svg";
 import scottyCoin from "/images/scotty-coin.svg";
+import { ChallengesMenu } from "./challenges-menu";
 
 interface PageHeaderProps {
     title: string;
@@ -26,9 +24,12 @@ export function PageHeader({
     leftComponent,
     rightComponent,
 }: PageHeaderProps) {
-    // Dummy data for stats
-    const challengesCompleted = 1;
-    const totalChallenges = 15;
+    const [isChallengesMenuOpen, setIsChallengesMenuOpen] = useState(false);
+    const { data: challengeData } = useChallengeData();
+
+    // Use real data if available, fallback to dummy data
+    const challengesCompleted = challengeData?.totalCompleted ?? 1;
+    const totalChallenges = challengeData?.totalChallenges ?? 15;
     const scottyCoins = 260;
 
     return (
@@ -39,23 +40,17 @@ export function PageHeader({
             {/* Top stats row */}
             <div className="w-full flex flex-row justify-between items-center px-6 pt-8 z-1">
                 {/* All Challenges Stat */}
-                <Popover>
-                    <PopoverTrigger asChild>
-                        <button
-                            type="button"
-                            className="flex items-center bg-white rounded-full px-3 py-2 shadow text-sm font-bold gap-1"
-                            aria-label="View Challenges"
-                        >
-                            <Flag size={18} className="text-red-600" />
-                            <span>
-                                {challengesCompleted}/{totalChallenges}
-                            </span>
-                        </button>
-                    </PopoverTrigger>
-                    <PopoverContent className="rounded-xl max-w-[90vw] min-w-[150px] text-center">
-                        Go to Challenges (dummy)
-                    </PopoverContent>
-                </Popover>
+                <button
+                    type="button"
+                    className="flex items-center bg-white rounded-full px-3 py-2 shadow text-sm font-bold gap-1"
+                    aria-label="View Challenges"
+                    onClick={() => setIsChallengesMenuOpen(true)}
+                >
+                    <Flag size={18} className="text-red-600" />
+                    <span>
+                        {challengesCompleted}/{totalChallenges}
+                    </span>
+                </button>
                 {/* ScottyCoins Stat */}
                 <Link
                     to="/terrier-trade"
@@ -107,6 +102,12 @@ export function PageHeader({
                     <div className="flex items-center">{rightComponent}</div>
                 </div>
             </div>
+
+            {/* Challenges Menu */}
+            <ChallengesMenu
+                isOpen={isChallengesMenuOpen}
+                onClose={() => setIsChallengesMenuOpen(false)}
+            />
         </div>
     );
 }

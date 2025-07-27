@@ -1,3 +1,5 @@
+import { getCategoriesWithPercentages } from "@/lib/challenge-data";
+import { useChallengeData } from "@/lib/hooks/use-challenge-data";
 import type { UserProfile } from "@/lib/types";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { Camera, ChevronRight, Gift } from "lucide-react";
@@ -71,6 +73,9 @@ export const Route = createFileRoute("/profile")({
 
 function Profile() {
     const data = useProfileData();
+    const { data: challengeData, loading: challengeLoading } =
+        useChallengeData();
+
     if (!data)
         return (
             <div className="flex justify-center items-center h-full">
@@ -133,20 +138,21 @@ function Profile() {
                         </span>
                     </div>
                     {/* Category Progress Bars */}
-                    <CategoryProgressBar
-                        categories={[
-                            { name: "The Essentials", percentage: 75 },
-                            {
-                                name: "Cool Corners of Carnegie",
-                                percentage: 25,
-                            },
-                            { name: "Campus of Bridges", percentage: 50 },
-                            { name: "Let's Eat", percentage: 25 },
-                            { name: "Minor-Major General", percentage: 55 },
-                            { name: "Off-Campus Adventures", percentage: 25 },
-                            { name: "Campus of Bridges", percentage: 90 },
-                        ]}
-                    />
+                    {challengeLoading ? (
+                        <div className="text-center py-4">
+                            Loading categories...
+                        </div>
+                    ) : (
+                        <CategoryProgressBar
+                            categories={
+                                challengeData
+                                    ? getCategoriesWithPercentages(
+                                          challengeData.categories,
+                                      )
+                                    : []
+                            }
+                        />
+                    )}
                 </div>
 
                 {/* Points Information */}
