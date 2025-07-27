@@ -79,7 +79,7 @@ function Profile() {
         );
 
     return (
-        <div className="bg-[#F3E9D2] min-h-screen pb-20 max-w-md mx-auto p-4 flex flex-col">
+        <div className="bg-[#F3E9D2] pb-20 p-4 flex flex-col">
             {/* Profile Card */}
             <Card className="rounded-4xl shadow-[0_7px_0_#bbb] p-4 mb-6 mt-4 relative overflow-visible">
                 {/* Decorative SVG at the top */}
