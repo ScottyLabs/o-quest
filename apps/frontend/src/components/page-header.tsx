@@ -1,7 +1,6 @@
 import { useChallengeData } from "@/lib/hooks/use-challenge-data";
 import { Link } from "@tanstack/react-router";
 import { Flag } from "lucide-react";
-import { useState } from "react";
 import type React from "react";
 import headerArc from "/images/header-arc.svg";
 import scottyCoin from "/images/scotty-coin.svg";
@@ -24,7 +23,6 @@ export function PageHeader({
     leftComponent,
     rightComponent,
 }: PageHeaderProps) {
-    const [isChallengesMenuOpen, setIsChallengesMenuOpen] = useState(false);
     const { data: challengeData } = useChallengeData();
 
     // Use real data if available, fallback to dummy data
@@ -40,17 +38,7 @@ export function PageHeader({
             {/* Top stats row */}
             <div className="w-full flex flex-row justify-between items-center px-6 pt-8 z-1">
                 {/* All Challenges Stat */}
-                <button
-                    type="button"
-                    className="flex items-center bg-white rounded-full px-3 py-2 shadow text-sm font-bold gap-1"
-                    aria-label="View Challenges"
-                    onClick={() => setIsChallengesMenuOpen(true)}
-                >
-                    <Flag size={18} className="text-red-600" />
-                    <span>
-                        {challengesCompleted}/{totalChallenges}
-                    </span>
-                </button>
+                <ChallengesMenu />
                 {/* ScottyCoins Stat */}
                 <Link
                     to="/terrier-trade"
@@ -102,12 +90,6 @@ export function PageHeader({
                     <div className="flex items-center">{rightComponent}</div>
                 </div>
             </div>
-
-            {/* Challenges Menu */}
-            <ChallengesMenu
-                isOpen={isChallengesMenuOpen}
-                onClose={() => setIsChallengesMenuOpen(false)}
-            />
         </div>
     );
 }
