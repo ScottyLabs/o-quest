@@ -5,6 +5,7 @@ import {
 } from "@/components/ui/popover";
 import { Flag } from "lucide-react";
 import type React from "react";
+import headerArc from "/images/header-arc.svg";
 import scottyCoin from "/images/scotty-coin.svg";
 
 interface PageHeaderProps {
@@ -32,7 +33,7 @@ export function PageHeader({
     return (
         <div>
             <div
-                className="relative flex flex-col items-center justify-center pb-4"
+                className="relative flex flex-col items-center justify-center"
                 style={{ background: bgColor }}
             >
                 {/* Top stats row */}
@@ -99,23 +100,13 @@ export function PageHeader({
                 {/* Decorative arc at the bottom */}
                 <div
                     className="w-full overflow-hidden"
-                    style={{ lineHeight: 0, marginTop: "-20px" }}
+                    style={{ lineHeight: 0, marginTop: "-100px" }}
                 >
-                    <svg
-                        viewBox="0 0 375 60"
-                        width="100%"
-                        height="60"
-                        preserveAspectRatio="none"
-                        style={{ display: "block" }}
-                        role="img"
-                        aria-label="Decorative arc separator"
-                    >
-                        <title>Decorative arc separator</title>
-                        <path
-                            d="M0,60 Q187.5,10 375,60 L375,60 L0,60 Z"
-                            fill="#f5e6e8"
-                        />
-                    </svg>
+                    <img
+                        src={headerArc}
+                        alt="Decorative arc separator"
+                        className="w-full h-full block"
+                    />
                 </div>
             </div>
             {/* Title below the arc */}
