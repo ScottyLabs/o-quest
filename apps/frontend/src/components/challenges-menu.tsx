@@ -9,27 +9,57 @@ import {
 import { useChallengeData } from "@/lib/hooks/use-challenge-data";
 import type { ChallengeCategoryData } from "@/lib/types";
 import { Flag } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 export function ChallengesMenu() {
     const { data, loading, error } = useChallengeData();
+    const [isOpen, setIsOpen] = useState(false);
+    const backgroundRef = useRef<HTMLDivElement>(null);
+
+    const handleBackgroundClick = (e: React.MouseEvent) => {
+        if (e.target === e.currentTarget) {
+            setIsOpen(false);
+        }
+    };
+
+    const handleBackgroundKeyDown = (e: React.KeyboardEvent) => {
+        console.log("handleBackgroundKeyDown", e.key);
+        if (e.key === "Escape") {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        if (isOpen && backgroundRef.current) {
+            backgroundRef.current.focus();
+        }
+    }, [isOpen]);
 
     return (
         <NavigationMenu className="relative">
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger className="flex items-center bg-white rounded-full px-3 py-2 shadow text-sm font-bold gap-1">
+                    <NavigationMenuTrigger
+                        className="flex items-center bg-white rounded-full px-3 py-2 shadow text-sm font-bold gap-1"
+                        onClick={() => setIsOpen(true)}
+                    >
                         <Flag size={18} className="text-red-600" />
                         <span>
                             {data?.totalCompleted ?? 0}/
                             {data?.totalChallenges ?? 0}
                         </span>
                     </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                        {createPortal(
-                            <div className="fixed inset-0 bg-[#2A2A2A] z-[99999] isolate">
+                    {isOpen &&
+                        createPortal(
+                            <div
+                                ref={backgroundRef}
+                                className="fixed inset-0 bg-[#2A2A2A] z-[99999] isolate"
+                                onClick={handleBackgroundClick}
+                                onKeyDown={handleBackgroundKeyDown}
+                            >
                                 <div className="absolute top-4 left-4 max-w-md">
-                                    <div className="p-6">
+                                    <div className="p-6 relative">
                                         {loading && (
                                             <div className="text-white text-center py-8">
                                                 Loading challenges...
@@ -105,7 +135,6 @@ export function ChallengesMenu() {
                             </div>,
                             document.body,
                         )}
-                    </NavigationMenuContent>
                 </NavigationMenuItem>
             </NavigationMenuList>
         </NavigationMenu>
