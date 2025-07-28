@@ -1,6 +1,7 @@
 import { PageHeader } from "@/components/page-header";
 import { PrizeCard } from "@/components/prize-card";
 import { createFileRoute } from "@tanstack/react-router";
+import { ShoppingCart } from "lucide-react";
 
 export const Route = createFileRoute("/terrier-trade")({
     component: TerrierTrade,
@@ -33,7 +34,7 @@ function TerrierTrade() {
         <div>
             <PageHeader
                 title="Terrier Trade"
-                infoText="This page lets you trade your points in for prizes."
+                icon={<ShoppingCart size={40} color="#C8102E" />}
             />
             <div className="p-4 max-w-xl mx-auto flex flex-col gap-8">
                 {prizes.map((prize) => (

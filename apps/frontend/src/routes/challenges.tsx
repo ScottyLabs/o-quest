@@ -2,6 +2,7 @@ import { ChallengeList } from "@/components/challenge-card";
 import { PageHeader } from "@/components/page-header";
 import type { Challenge } from "@/lib/types";
 import { createFileRoute } from "@tanstack/react-router";
+import { Trophy } from "lucide-react";
 import { useEffect, useState } from "react";
 
 // Mock function to simulate backend data fetching
@@ -84,7 +85,7 @@ function Challenges() {
         <div>
             <PageHeader
                 title="Challenges"
-                infoText="This page shows you the challenges."
+                icon={<Trophy size={40} color="#C8102E" />}
             />
             <div className="p-4 max-w-xl mx-auto">
                 <ChallengeList challenges={challenges} />

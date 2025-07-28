@@ -1,3 +1,5 @@
+import { getCategoriesWithPercentages } from "@/lib/challenge-data";
+import { useChallengeData } from "@/lib/hooks/use-challenge-data";
 import type { UserProfile } from "@/lib/types";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { Camera, ChevronRight, Gift } from "lucide-react";
@@ -71,6 +73,9 @@ export const Route = createFileRoute("/profile")({
 
 function Profile() {
     const data = useProfileData();
+    const { data: challengeData, loading: challengeLoading } =
+        useChallengeData();
+
     if (!data)
         return (
             <div className="flex justify-center items-center h-full">
@@ -79,7 +84,7 @@ function Profile() {
         );
 
     return (
-        <div className="bg-[#F3E9D2] min-h-screen pb-20 max-w-md mx-auto p-4 flex flex-col">
+        <div className="bg-[#F3E9D2] pb-20 p-4 flex flex-col">
             {/* Profile Card */}
             <Card className="rounded-4xl shadow-[0_7px_0_#bbb] p-4 mb-6 mt-4 relative overflow-visible">
                 {/* Decorative SVG at the top */}
@@ -133,20 +138,21 @@ function Profile() {
                         </span>
                     </div>
                     {/* Category Progress Bars */}
-                    <CategoryProgressBar
-                        categories={[
-                            { name: "The Essentials", percentage: 75 },
-                            {
-                                name: "Cool Corners of Carnegie",
-                                percentage: 25,
-                            },
-                            { name: "Campus of Bridges", percentage: 50 },
-                            { name: "Let's Eat", percentage: 25 },
-                            { name: "Minor-Major General", percentage: 55 },
-                            { name: "Off-Campus Adventures", percentage: 25 },
-                            { name: "Campus of Bridges", percentage: 90 },
-                        ]}
-                    />
+                    {challengeLoading ? (
+                        <div className="text-center py-4">
+                            Loading categories...
+                        </div>
+                    ) : (
+                        <CategoryProgressBar
+                            categories={
+                                challengeData
+                                    ? getCategoriesWithPercentages(
+                                          challengeData.categories,
+                                      )
+                                    : []
+                            }
+                        />
+                    )}
                 </div>
 
                 {/* Points Information */}
