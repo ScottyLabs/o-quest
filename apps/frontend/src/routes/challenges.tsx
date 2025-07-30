@@ -1,7 +1,8 @@
+import { CategoryTabs } from "@/components/category-tabs";
 import { ChallengeList } from "@/components/challenge-card";
 import { PageHeader } from "@/components/page-header";
 import type { Challenge } from "@/lib/types";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { Trophy } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -20,6 +21,7 @@ function useChallengesData(): Challenge[] | null {
                     unlocked: true,
                     unlock_date: "2024-01-15",
                     coins_earned_for_completion: 50,
+                    category: "Off-Campus",
                 },
                 {
                     id: 1,
@@ -30,6 +32,7 @@ function useChallengesData(): Challenge[] | null {
                     unlocked: true,
                     unlock_date: "2024-01-16",
                     coins_earned_for_completion: 75,
+                    category: "Members of Carnegie",
                 },
                 {
                     id: 2,
@@ -40,6 +43,7 @@ function useChallengesData(): Challenge[] | null {
                     unlocked: false,
                     unlock_date: "2024-01-20",
                     coins_earned_for_completion: 100,
+                    category: "Minor-Major General",
                 },
                 {
                     id: 3,
@@ -50,6 +54,7 @@ function useChallengesData(): Challenge[] | null {
                     unlocked: true,
                     unlock_date: "2024-01-17",
                     coins_earned_for_completion: 150,
+                    category: "Off-Campus",
                 },
                 {
                     id: 4,
@@ -59,6 +64,17 @@ function useChallengesData(): Challenge[] | null {
                     unlocked: false,
                     unlock_date: "2024-01-25",
                     coins_earned_for_completion: 200,
+                    category: "Members of Carnegie",
+                },
+                {
+                    id: 5,
+                    name: "Campus Explorer",
+                    description: "Visit all the main buildings on campus",
+                    completed: false,
+                    unlocked: true,
+                    unlock_date: "2024-01-18",
+                    coins_earned_for_completion: 125,
+                    category: "Minor-Major General",
                 },
             ]);
         }, 500);
@@ -68,10 +84,14 @@ function useChallengesData(): Challenge[] | null {
 
 export const Route = createFileRoute("/challenges")({
     component: Challenges,
+    validateSearch: (search: Record<string, unknown>) => ({
+        category: (search.category as string) || "all",
+    }),
 });
 
 function Challenges() {
     const challenges = useChallengesData();
+    const { category } = useSearch({ from: "/challenges" });
 
     if (!challenges) {
         return (
@@ -81,6 +101,18 @@ function Challenges() {
         );
     }
 
+    // Filter challenges based on selected category
+    const filteredChallenges =
+        category === "all"
+            ? challenges
+            : challenges.filter((challenge) => challenge.category === category);
+
+    // Get unique categories from challenges
+    const categories = [
+        "all",
+        ...Array.from(new Set(challenges.map((c) => c.category))),
+    ];
+
     return (
         <div>
             <PageHeader
@@ -88,7 +120,11 @@ function Challenges() {
                 icon={<Trophy size={40} color="#C8102E" />}
             />
             <div className="p-4 max-w-xl mx-auto">
-                <ChallengeList challenges={challenges} />
+                <CategoryTabs
+                    categories={categories}
+                    selectedCategory={category}
+                />
+                <ChallengeList challenges={filteredChallenges} />
             </div>
         </div>
     );
