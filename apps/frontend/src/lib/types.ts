@@ -42,6 +42,7 @@ export type Challenge = {
     completed: boolean;
     unlocked: boolean;
     unlock_date: string;
+    category: string;
 };
 
 export type ChallengeCategoryData = {
