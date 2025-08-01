@@ -72,8 +72,8 @@ const contributors: Contributor[] = [
     {
         firstName: "Jeffery",
         lastName: "Wang",
-        role: "Developer",
-        major: "BXA",
+        role: "Designer and Developer",
+        major: "BCSA",
         grad_year: 2027,
         contribution_year: 2025,
     },
@@ -119,16 +119,19 @@ function About() {
     const pastContributorsByYear = groupByContributionYear(pastContributors);
 
     return (
-        <div>
+        <div className="w-full">
             <PageHeader
                 title="About"
                 icon={<Info size={40} color="#C8102E" />}
             />
 
-            <div className="flex flex-col items-center leading-snug">
+            <div className="relative flex justify-center">
+                <img className="w-[90%] h-[80%]" src="/images/info-page-scotty.svg" alt="Scotty mascot" />
+                <div className="absolute top-[24%] left-1/2 transform -translate-x-1/2 flex flex-col items-center leading-snug justify-start gap-12">
                 {/* How to Play button */}
                 <Button
-                    className="mb-4 px-4 py-2 bg-red-700 text-white rounded-full font-bold"
+                    className="w-80 h-20 inline-flex justify-center items-center mb-4 px-4 py-2 bg-red-700 text-white text-4xl font-extrabold 
+                    rounded-2xl shadow-[0px_7px_0px_0px_rgba(128,27,39,1.00)] border-4 border-red-900"
                     onClick={() =>
                         navigate({
                             to: "/onboarding",
@@ -141,7 +144,8 @@ function About() {
 
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button className="mb-4 px-4 py-2 bg-red-700 text-white rounded-full font-bold">
+                        <Button className="w-80 h-20 inline-flex justify-center items-center mb-4 px-4 py-2 bg-red-700 text-white text-4xl font-extrabold 
+                    rounded-2xl shadow-[0px_7px_0px_0px_rgba(128,27,39,1.00)] border-4 border-red-900">
                             Credits
                         </Button>
                     </DialogTrigger>
@@ -216,6 +220,19 @@ function About() {
                         )}
                     </DialogContent>
                 </Dialog>
+                <Button
+                    className="w-80 h-20 inline-flex justify-center items-center mb-4 px-4 py-2 bg-red-700 text-white text-4xl font-extrabold 
+                    rounded-2xl shadow-[0px_7px_0px_0px_rgba(128,27,39,1.00)] border-4 border-red-900"
+                    onClick={() =>
+                        navigate({
+                            to: "/onboarding",
+                            search: { from: "about" },
+                        })
+                    }
+                >
+                                         Terrier Trade
+                 </Button>
+                </div>
             </div>
         </div>
     );

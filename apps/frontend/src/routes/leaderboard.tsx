@@ -63,7 +63,7 @@ function Leaderboard() {
                 title="Leaderboard"
                 icon={<Crown size={40} color="#C8102E" />}
             />
-            <div className="bg-white divide-y overflow-hidden">
+            <div className="mt-8 bg-white divide-y overflow-hidden">
                 {inTop10 ? (
                     <>
                         {top10.map((user) => (

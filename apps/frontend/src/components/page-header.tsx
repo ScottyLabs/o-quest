@@ -32,7 +32,7 @@ export function PageHeader({
 
     return (
         <div
-            className="relative flex flex-col items-center justify-center"
+            className="relative flex flex-col items-center justify-center w-full"
             style={{ background: bgColor }}
         >
             {/* Top stats row */}
@@ -68,12 +68,13 @@ export function PageHeader({
             {/* Decorative arc with title inside */}
             <div
                 className="w-full overflow-hidden relative"
-                style={{ marginTop: "-100px" }}
+                style={{ marginTop: "-100px", marginBottom: "-0.75px" }}
             >
                 <img
                     src={headerArc}
                     alt="Decorative arc separator"
                     className="w-full h-full block"
+                    style={{ width: "calc(120vw)"}}
                 />
                 {/* Title and components positioned inside the arc, below the icon */}
                 <div className="absolute inset-0 flex justify-between items-end px-6 pb-1">
