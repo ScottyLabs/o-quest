@@ -39,10 +39,18 @@ const steps: Step[] = [
         action: "next",
     },
     {
-        title: "Reap Rewards",
+        title: "Redeem Rewards",
         description:
-            "Trade Scotty Coin at the Terrier Trade to earn swag, rewards, and more",
+            "Trade Scotty Coin at the Terrier Trade to redeem swag, rewards, and more",
         image: "/images/onboarding-images/terrier-trade-card-placeholder.svg",
+        button: "Next",
+        action: "next",
+    },
+    {
+        title: "Claim Rewards",
+        description:
+            "Claim rewards by scanning redeemed QR Codes at Community Life Office in Morewood Garden",
+        image: "/images/onboarding-images/redeem-rewards.svg",
         button: "Log In",
         action: "login",
     },

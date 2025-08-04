@@ -24,7 +24,15 @@ const LockedIcon = () => (
 );
 
 // Wrapper component that adds icon and line
-export function ChallengeCardWithIcon({ challenge }: { challenge: Challenge }) {
+export function ChallengeCardWithIcon({ 
+    challenge, 
+    onComplete, 
+    onUnlock 
+}: { 
+    challenge: Challenge;
+    onComplete?: (challengeId: number) => void;
+    onUnlock?: (challengeId: number) => void;
+}) {
     const { unlocked, completed } = challenge;
 
     let Icon = null;
@@ -41,15 +49,28 @@ export function ChallengeCardWithIcon({ challenge }: { challenge: Challenge }) {
             </div>
             {/* Card content */}
             <div className="flex-1">
-                <ChallengeCard challenge={challenge} />
+                <ChallengeCard 
+                    challenge={challenge} 
+                    onComplete={onComplete}
+                    onUnlock={onUnlock}
+                />
             </div>
         </div>
     );
 }
 
 // Main wrapper
-export function ChallengeCard({ challenge }: { challenge: Challenge }) {
+export function ChallengeCard({ 
+    challenge, 
+    onComplete, 
+    onUnlock 
+}: { 
+    challenge: Challenge;
+    onComplete?: (challengeId: number) => void;
+    onUnlock?: (challengeId: number) => void;
+}) {
     const {
+        id,
         name,
         description,
         coins_earned_for_completion,
@@ -57,6 +78,19 @@ export function ChallengeCard({ challenge }: { challenge: Challenge }) {
         unlocked,
         unlock_date,
     } = challenge;
+
+    const handleComplete = () => {
+        if (onComplete && unlocked && !completed) {
+            onComplete(id);
+        }
+    };
+
+    const handleUnlock = () => {
+        if (onUnlock && !unlocked) {
+            onUnlock(id);
+        }
+    };
+
     // Locked state
     if (!unlocked) {
         return (
@@ -72,9 +106,12 @@ export function ChallengeCard({ challenge }: { challenge: Challenge }) {
                         </div>
                     </div>
                     <div className="ml-2">
-                        <div className="w-11 h-9 rounded-md bg-white flex items-center justify-center shadow-[0_4px_0_#bbb]">
+                        <Button 
+                            className="w-11 h-9 rounded-md bg-white flex items-center justify-center shadow-[0_4px_0_#bbb] hover:bg-gray-100 transition-colors"
+                            onClick={handleUnlock}
+                        >
                             <Lock size={20} color="#222" strokeWidth={2} />
-                        </div>
+                        </Button>
                     </div>
                 </CardContent>
             </Card>
@@ -113,7 +150,10 @@ export function ChallengeCard({ challenge }: { challenge: Challenge }) {
                         alt="Scotty Coin"
                         className="w-6 h-6 mt-1"
                     />
-                    <Button className="w-11 h-9 rounded-md bg-gray-100 flex items-center justify-center shadow-[0_4px_0_#bbb]">
+                    <Button 
+                        className="w-11 h-9 rounded-md bg-gray-100 flex items-center justify-center shadow-[0_4px_0_#bbb] hover:bg-gray-200 transition-colors"
+                        onClick={handleComplete}
+                    >
                         <Check size={40} color="#4CAF50" strokeWidth={3} />
                     </Button>
                 </div>
@@ -122,7 +162,15 @@ export function ChallengeCard({ challenge }: { challenge: Challenge }) {
     );
 }
 
-export function ChallengeList({ challenges }: { challenges: Challenge[] }) {
+export function ChallengeList({ 
+    challenges, 
+    onComplete, 
+    onUnlock 
+}: { 
+    challenges: Challenge[];
+    onComplete?: (challengeId: number) => void;
+    onUnlock?: (challengeId: number) => void;
+}) {
     const containerRef = useRef<HTMLDivElement>(null);
     const [lineStyle, setLineStyle] = useState({ top: 0, height: 0 });
 
@@ -164,6 +212,8 @@ export function ChallengeList({ challenges }: { challenges: Challenge[] }) {
                 <ChallengeCardWithIcon
                     key={challenge.id}
                     challenge={challenge}
+                    onComplete={onComplete}
+                    onUnlock={onUnlock}
                 />
             ))}
         </div>

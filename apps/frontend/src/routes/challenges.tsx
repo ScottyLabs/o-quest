@@ -1,10 +1,11 @@
 import { CategoryTabs } from "@/components/category-tabs";
 import { ChallengeList } from "@/components/challenge-card";
 import { PageHeader } from "@/components/page-header";
-import type { Challenge } from "@/lib/types";
+import type { Challenge, ChallengeCategoryData } from "@/lib/types";
 import { createFileRoute, useSearch } from "@tanstack/react-router";
-import { Trophy } from "lucide-react";
+import { Trophy, Utensils, MapPin, GraduationCap, Car, BookOpen, Building2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { MOCK_CATEGORIES } from "@/lib/challenge-data";
 
 // Mock function to simulate backend data fetching
 function useChallengesData(): Challenge[] | null {
@@ -43,7 +44,7 @@ function useChallengesData(): Challenge[] | null {
                     unlocked: false,
                     unlock_date: "2024-01-20",
                     coins_earned_for_completion: 100,
-                    category: "Minor-Major General",
+                    category: "Minor-Major Generals",
                 },
                 {
                     id: 3,
@@ -64,7 +65,7 @@ function useChallengesData(): Challenge[] | null {
                     unlocked: false,
                     unlock_date: "2024-01-25",
                     coins_earned_for_completion: 200,
-                    category: "Members of Carnegie",
+                    category: "Minor-Major Generals",
                 },
                 {
                     id: 5,
@@ -74,7 +75,47 @@ function useChallengesData(): Challenge[] | null {
                     unlocked: true,
                     unlock_date: "2024-01-18",
                     coins_earned_for_completion: 125,
-                    category: "Minor-Major General",
+                    category: "Minor-Major Generals",
+                },
+                {
+                    id: 6,
+                    name: "New Category Challenge",
+                    description: "This is a challenge in a new category",
+                    completed: false,
+                    unlocked: true,
+                    unlock_date: "2024-01-19",
+                    coins_earned_for_completion: 80,
+                    category: "The Essentials",
+                },
+                {
+                    id: 7,
+                    name: "New Category Challenge",
+                    description: "This is a challenge in a new category",
+                    completed: false,
+                    unlocked: true,
+                    unlock_date: "2024-01-19",
+                    coins_earned_for_completion: 80,
+                    category: "Corners of Carnegie",
+                },
+                {
+                    id: 8,
+                    name: "New Category Challenge",
+                    description: "This is a challenge in a new category",
+                    completed: false,
+                    unlocked: true,
+                    unlock_date: "2024-01-19",
+                    coins_earned_for_completion: 80,
+                    category: "Campus of Bridges",
+                },
+                {
+                    id: 9,
+                    name: "New Category Challenge",
+                    description: "This is a challenge in a new category",
+                    completed: false,
+                    unlocked: true,
+                    unlock_date: "2024-01-19",
+                    coins_earned_for_completion: 80,
+                    category: "Let's Eat",
                 },
             ]);
         }, 500);
@@ -90,10 +131,38 @@ export const Route = createFileRoute("/challenges")({
 });
 
 function Challenges() {
-    const challenges = useChallengesData();
+    const challengesData = useChallengesData();
     const { category } = useSearch({ from: "/challenges" });
+    const [challenges, setChallenges] = useState<Challenge[]>([]);
 
-    if (!challenges) {
+    // Update challenges when data is loaded
+    useEffect(() => {
+        if (challengesData) {
+            setChallenges(challengesData);
+        }
+    }, [challengesData]);
+
+    const handleComplete = (challengeId: number) => {
+        setChallenges(prevChallenges =>
+            prevChallenges.map(challenge =>
+                challenge.id === challengeId
+                    ? { ...challenge, completed: true }
+                    : challenge
+            )
+        );
+    };
+
+    const handleUnlock = (challengeId: number) => {
+        setChallenges(prevChallenges =>
+            prevChallenges.map(challenge =>
+                challenge.id === challengeId
+                    ? { ...challenge, unlocked: true }
+                    : challenge
+            )
+        );
+    };
+
+    if (!challengesData) {
         return (
             <div className="flex justify-center items-center h-full">
                 Loading...
@@ -111,20 +180,55 @@ function Challenges() {
     const categories = [
         "all",
         ...Array.from(new Set(challenges.map((c) => c.category))),
+        // ...MOCK_CATEGORIES.map((cat) => cat.name),
     ];
+
+    // Get the color for the selected category
+    const selectedCategoryData = MOCK_CATEGORIES.find(
+        (cat: ChallengeCategoryData) => cat.name === category
+    );
+    const headerColor = selectedCategoryData?.color || "#C8102E"; // Default to CMU red
+    const headerTitle = category === "all" ? "Challenges" : category;
+
+    // Get the appropriate icon for the selected category
+    const getHeaderIcon = (category: string) => {
+        switch (category) {
+            case "The Essentials":
+                return <BookOpen size={40} color={headerColor} />;
+            case "Let's Eat":
+                return <Utensils size={40} color={headerColor} />;
+            case "Corners of Carnegie":
+                return <MapPin size={40} color={headerColor} />;
+            case "Campus of Bridges":
+                return <Building2 size={40} color={headerColor} />;
+            case "Minor-Major Generals":
+                return <GraduationCap size={40} color={headerColor} />;
+            case "Off-Campus":
+                return <Car size={40} color={headerColor} />;
+            default:
+                return <Trophy size={40} color={headerColor} />;
+        }
+    };
 
     return (
         <div>
             <PageHeader
-                title="Challenges"
-                icon={<Trophy size={40} color="#C8102E" />}
+                title={headerTitle}
+                icon={getHeaderIcon(category)}
+                bgColor={headerColor}
+                textColor={headerColor}
             />
             <div className="p-4 max-w-xl mx-auto">
                 <CategoryTabs
                     categories={categories}
                     selectedCategory={category}
+                    selectedCategoryColor={headerColor}
                 />
-                <ChallengeList challenges={filteredChallenges} />
+                <ChallengeList 
+                    challenges={filteredChallenges} 
+                    onComplete={handleComplete}
+                    onUnlock={handleUnlock}
+                />
             </div>
         </div>
     );

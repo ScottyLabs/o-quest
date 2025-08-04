@@ -1,6 +1,4 @@
-import { useChallengeData } from "@/lib/hooks/use-challenge-data";
 import { Link } from "@tanstack/react-router";
-import { Flag } from "lucide-react";
 import type React from "react";
 import headerArc from "/images/header-arc.svg";
 import scottyCoin from "/images/scotty-coin.svg";
@@ -23,11 +21,7 @@ export function PageHeader({
     leftComponent,
     rightComponent,
 }: PageHeaderProps) {
-    const { data: challengeData } = useChallengeData();
-
     // Use real data if available, fallback to dummy data
-    const challengesCompleted = challengeData?.totalCompleted ?? 1;
-    const totalChallenges = challengeData?.totalChallenges ?? 15;
     const scottyCoins = 260;
 
     return (

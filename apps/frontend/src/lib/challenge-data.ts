@@ -1,7 +1,7 @@
 import type { ChallengeCategoryData, ChallengeData } from "./types";
 
 // Mock data - this will eventually be fetched from the backend
-const MOCK_CATEGORIES: ChallengeCategoryData[] = [
+export const MOCK_CATEGORIES: ChallengeCategoryData[] = [
     {
         name: "The Essentials",
         completed: 7,
