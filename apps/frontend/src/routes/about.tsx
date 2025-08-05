@@ -119,7 +119,7 @@ function About() {
     const pastContributorsByYear = groupByContributionYear(pastContributors);
 
     return (
-        <div className="w-full">
+        <div >
             <PageHeader
                 title="About"
                 icon={<Info size={40} color="#C8102E" />}

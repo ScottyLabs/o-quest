@@ -6,6 +6,7 @@ import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { Trophy, Utensils, MapPin, GraduationCap, Car, BookOpen, Building2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { MOCK_CATEGORIES } from "@/lib/challenge-data";
+import type { FilterOption } from "@/components/filter-card";
 
 // Mock function to simulate backend data fetching
 function useChallengesData(): Challenge[] | null {
@@ -134,6 +135,7 @@ function Challenges() {
     const challengesData = useChallengesData();
     const { category } = useSearch({ from: "/challenges" });
     const [challenges, setChallenges] = useState<Challenge[]>([]);
+    const [selectedFilter, setSelectedFilter] = useState<FilterOption>("all");
 
     // Update challenges when data is loaded
     useEffect(() => {
@@ -162,6 +164,10 @@ function Challenges() {
         );
     };
 
+    const handleFilterChange = (filter: FilterOption) => {
+        setSelectedFilter(filter);
+    };
+
     if (!challengesData) {
         return (
             <div className="flex justify-center items-center h-full">
@@ -171,16 +177,33 @@ function Challenges() {
     }
 
     // Filter challenges based on selected category
-    const filteredChallenges =
+    let filteredChallenges =
         category === "all"
             ? challenges
             : challenges.filter((challenge) => challenge.category === category);
 
+    // Apply additional filter based on selected filter option
+    switch (selectedFilter) {
+        case "complete":
+            filteredChallenges = filteredChallenges.filter(challenge => challenge.completed);
+            break;
+        case "uncomplete":
+            filteredChallenges = filteredChallenges.filter(challenge => !challenge.completed && challenge.unlocked);
+            break;
+        case "locked":
+            filteredChallenges = filteredChallenges.filter(challenge => !challenge.unlocked);
+            break;
+        case "all":
+        default:
+            // No additional filtering needed
+            break;
+    }
+
     // Get unique categories from challenges
     const categories = [
         "all",
-        ...Array.from(new Set(challenges.map((c) => c.category))),
-        // ...MOCK_CATEGORIES.map((cat) => cat.name),
+        //...Array.from(new Set(challenges.map((c) => c.category))),
+        ...MOCK_CATEGORIES.map((cat) => cat.name),
     ];
 
     // Get the color for the selected category
@@ -217,6 +240,11 @@ function Challenges() {
                 icon={getHeaderIcon(category)}
                 bgColor={headerColor}
                 textColor={headerColor}
+                showFilter={true}
+                showInfo={true}
+                onFilterChange={handleFilterChange}
+                selectedFilter={selectedFilter}
+                category={category}
             />
             <div className="p-4 max-w-xl mx-auto">
                 <CategoryTabs

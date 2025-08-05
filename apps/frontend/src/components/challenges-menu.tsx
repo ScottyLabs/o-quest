@@ -3,11 +3,13 @@ import type { ChallengeCategoryData } from "@/lib/types";
 import { Flag } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useNavigate } from "@tanstack/react-router";
 
 export function ChallengesMenu() {
     const { data, loading, error } = useChallengeData();
     const [isOpen, setIsOpen] = useState(false);
     const backgroundRef = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
 
     const handleBackgroundClick = (e: React.MouseEvent) => {
         if (e.target === e.currentTarget) {
@@ -20,6 +22,22 @@ export function ChallengesMenu() {
         if (e.key === "Escape") {
             setIsOpen(false);
         }
+    };
+
+    const handleCategoryClick = (categoryName: string) => {
+        setIsOpen(false);
+        navigate({
+            to: "/challenges",
+            search: { category: categoryName },
+        });
+    };
+
+    const handleAllChallengesClick = () => {
+        setIsOpen(false);
+        navigate({
+            to: "/challenges",
+            search: { category: "all" },
+        });
     };
 
     useEffect(() => {
@@ -65,7 +83,10 @@ export function ChallengesMenu() {
                                 {data && (
                                     <div className="space-y-3">
                                         {/* All Challenges Row (Highlighted) */}
-                                        <div className="flex items-center gap-3">
+                                        <div 
+                                            className="flex items-center gap-3 cursor-pointer hover:bg-[#3A3A3A] rounded-lg p-2 transition-colors"
+                                            onClick={handleAllChallengesClick}
+                                        >
                                             <div className="bg-[#8B7355] rounded-full px-4 py-2 flex items-center gap-2 border border-purple-200">
                                                 <Flag
                                                     size={16}
@@ -88,7 +109,8 @@ export function ChallengesMenu() {
                                             ) => (
                                                 <div
                                                     key={category.name}
-                                                    className="flex items-center gap-3"
+                                                    className="flex items-center gap-3 cursor-pointer hover:bg-[#3A3A3A] rounded-lg p-2 transition-colors"
+                                                    onClick={() => handleCategoryClick(category.name)}
                                                 >
                                                     <div className="bg-white rounded-full px-4 py-2 flex items-center gap-2 border border-purple-200">
                                                         <Flag
